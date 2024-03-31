@@ -52,7 +52,7 @@ typedef struct server_teams {
     char *pwd;
     check_t check;
     int status;
-} teams_s;
+} steams_t;
 
 int create_socket(void);
 
