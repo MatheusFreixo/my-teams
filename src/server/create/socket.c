@@ -1,6 +1,6 @@
 /*
 ** EPITECH PROJECT, 2024
-** my_teams [WSL: Ubuntu]
+** my_teams
 ** File description:
 ** socket
 */
@@ -30,6 +30,14 @@ struct sockaddr_in configure_socket(int port)
 int bind_socket(int fd, struct sockaddr *addr, socklen_t addr_len)
 {
     if (bind(fd, addr, addr_len) < 0){
+        return (84);
+    }
+    return (0);
+}
+
+int listen_on_socket(int fd)
+{
+    if (listen(fd, 10) != 0){
         return (84);
     }
     return (0);
