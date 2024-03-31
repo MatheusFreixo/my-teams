@@ -26,3 +26,11 @@ struct sockaddr_in configure_socket(int port)
     addr.sin_port = htons(port);
     return (addr);
 }
+
+int bind_socket(int fd, struct sockaddr *addr, socklen_t addr_len)
+{
+    if (bind(fd, addr, addr_len) < 0){
+        return (84);
+    }
+    return (0);
+}
