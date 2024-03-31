@@ -60,4 +60,10 @@ struct sockaddr_in configure_socket(int port);
 
 int teams_server(char *port);
 
+int bind_socket(steams_t *server);
+
+int listen_on_socket(int fd);
+
+int error_handling(steams_t *server);
+
 #endif /* !TEAMS_SERVER_H_ */

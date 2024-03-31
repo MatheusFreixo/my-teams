@@ -29,5 +29,8 @@ int teams_server(char *port)
 {
     steams_t *server = setup_server_struct(port);
 
+    if (error_handling(server) == 84){
+        return (84);
+    }
     return (0);
 }

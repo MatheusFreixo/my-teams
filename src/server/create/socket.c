@@ -27,9 +27,10 @@ struct sockaddr_in configure_socket(int port)
     return (addr);
 }
 
-int bind_socket(int fd, struct sockaddr *addr, socklen_t addr_len)
+int bind_socket(steams_t *server)
 {
-    if (bind(fd, addr, addr_len) < 0){
+    if (bind(server->fd, (struct sockaddr *)&server->addr,
+            sizeof(server->addr)) < 0){
         return (84);
     }
     return (0);
