@@ -58,4 +58,6 @@ int create_socket(void);
 
 struct sockaddr_in configure_socket(int port);
 
+int teams_server(char *port);
+
 #endif /* !TEAMS_SERVER_H_ */
