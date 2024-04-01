@@ -29,6 +29,18 @@ int *storing_clients(steams_t *server)
     return (clients);
 }
 
+void check_clients(steams_t *server)
+{
+    if (FD_ISSET(server->fd, &server->readfds)) {
+        server->client_fds = storing_clients(server);
+    }
+    for (int i = 0; i < 1024; i++) {
+        if (FD_ISSET(server->client_fds[i], &server->readfds)) {
+            server->client_fds = check_disconnection(server, i);
+        }
+    }
+}
+
 void set_clients(steams_t *server)
 {
     for (int i = 0; i < 1024; i++) {
@@ -40,5 +52,5 @@ void set_clients(steams_t *server)
         // to_exit(server);
         exit(84);
     }
-    // check_clients(server);
+    check_clients(server);
 }

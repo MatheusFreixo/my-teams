@@ -68,4 +68,6 @@ int error_handling(steams_t *server);
 
 void set_clients(steams_t *server);
 
+int *check_disconnection(steams_t *server, int i);
+
 #endif /* !TEAMS_SERVER_H_ */
