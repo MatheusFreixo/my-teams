@@ -49,7 +49,7 @@ void set_clients(steams_t *server)
         }
     }
     if (select(1024, &server->readfds, NULL, NULL, NULL) < 0) {
-        // to_exit(server);
+        to_exit(server);
         exit(84);
     }
     check_clients(server);

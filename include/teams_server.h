@@ -70,4 +70,8 @@ void set_clients(steams_t *server);
 
 int *check_disconnection(steams_t *server, int i);
 
+void to_exit(steams_t *server);
+
+void free_arr(steams_t *server);
+
 #endif /* !TEAMS_SERVER_H_ */
