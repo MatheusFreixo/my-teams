@@ -13,5 +13,6 @@ void infinite_loop(steams_t *server)
     while (1) {
         FD_ZERO(&server->readfds);
         FD_SET(server->fd, &server->readfds);
+        set_clients(server);
     }
 }

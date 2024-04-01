@@ -66,4 +66,6 @@ int listen_on_socket(int fd);
 
 int error_handling(steams_t *server);
 
+void set_clients(steams_t *server);
+
 #endif /* !TEAMS_SERVER_H_ */
