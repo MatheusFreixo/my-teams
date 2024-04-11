@@ -5,7 +5,7 @@
 ** client_management
 */
 
-#include "./../../../../include/teams_server.h"
+#include "./../../../include/teams_server.h"
 
 int *storing_clients(steams_t *server)
 {

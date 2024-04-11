@@ -5,7 +5,7 @@
 ** error_handling
 */
 
-#include "../../../../include/teams_server.h"
+#include "../../../include/teams_server.h"
 
 int error_handling(steams_t *server)
 {

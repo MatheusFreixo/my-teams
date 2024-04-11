@@ -5,7 +5,7 @@
 ** connection
 */
 
-#include "./../../../../include/teams_server.h"
+#include "./../../../include/teams_server.h"
 
 int *check_disconnection(steams_t *server, int i)
 {
