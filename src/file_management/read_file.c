@@ -20,5 +20,5 @@ char *readfile(char *filepath)
     rd = read(fd, bf, size);
     bf[rd] = '\0';
     close(fd);
-    return(bf);
+    return (bf);
 }

@@ -22,7 +22,8 @@ int *storing_clients(steams_t *server)
             clients[i] = server->client_fd;
             break;
         }
-    write(server->client_fd, "Connected to the server", strlen("Connected to the server"));
+    write(server->client_fd, "Connected to the server",
+            strlen("Connected to the server"));
     printf("Client connected\n");
     server->check.user[0] = false;
     server->check.pass[0] = false;
@@ -34,7 +35,6 @@ void check_clients(steams_t *server)
     if (FD_ISSET(server->fd, &server->readfds)) {
         server->client_fds = storing_clients(server);
     }
-
     for (int i = 0; i < 1024; i++) {
         if (FD_ISSET(server->client_fds[i], &server->readfds)) {
             server->client_fds = check_disconnection(server, i);

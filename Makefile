@@ -32,11 +32,13 @@ NAME_SERVER	=	myteams_server
 
 NAME_CLIENT	=	myteams_cli
 
+LIB			=	-L./libs/myteams/ -lmyteams
+
 all:	$(NAME)
 
 $(NAME):	$(OBJ_SERVER) $(OBJ_CLIENT)
-		gcc -I./libs/myteams $(FLAG) $(NAME_SERVER) $(OBJ_SERVER) -L./libs/myteams/ -lmyteams
-		gcc -I./libs/myteams $(FLAG) $(NAME_CLIENT) $(OBJ_CLIENT) -L./libs/myteams/ -lmyteams
+		gcc -I./libs/myteams $(FLAG) $(NAME_SERVER) $(OBJ_SERVER) $(LIB)
+		gcc -I./libs/myteams $(FLAG) $(NAME_CLIENT) $(OBJ_CLIENT) $(LIB)
 
 clean:
 	rm -f $(OBJ_SERVER) $(OBJ_CLIENT)

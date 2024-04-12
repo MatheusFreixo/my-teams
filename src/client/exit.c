@@ -18,7 +18,7 @@ char *free_buff(cteams_t *client)
 {
     free(client->buffer);
     client->buffer = malloc(sizeof(char) * 1024 + 1);
-    return(client->buffer);
+    return (client->buffer);
 }
 
 void free_arr(cteams_t *client)
