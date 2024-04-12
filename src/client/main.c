@@ -27,8 +27,6 @@ struct client_teams *setup_client_struct(char *ip, char *port)
 
 int main(int argc, char **argv)
 {
-    char *buff = "Client connected";
-    char *buffer = malloc(sizeof(char) * 1024 + 1);
     cteams_t *client;
 
     if (argc != 3){
