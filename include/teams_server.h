@@ -8,18 +8,8 @@
 #ifndef TEAMS_SERVER_H_
     #define TEAMS_SERVER_H_
 
-    #include <stdio.h>
-    #include <stdlib.h>
-    #include <stdbool.h>
-    #include <string.h>
-    #include <unistd.h>
-    #include <arpa/inet.h>
-    #include <sys/socket.h>
-    #include <sys/select.h>
-    #include <sys/stat.h>
-    #include <fcntl.h>
-    #include <sys/wait.h>
-    #include <dirent.h>
+    #include "my_teams.h"
+    #include "../libs/myteams/logging_server.h"
 
 typedef struct message {
     char *xxx;
@@ -73,5 +63,7 @@ int *check_disconnection(steams_t *server, int i);
 void to_exit(steams_t *server);
 
 void free_arr(steams_t *server);
+
+void infinite_loop(steams_t *server);
 
 #endif /* !TEAMS_SERVER_H_ */

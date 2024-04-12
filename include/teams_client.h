@@ -55,4 +55,6 @@ struct sockaddr_in configure_socket(int ip, int port);
 
 void to_exit(cteams_t *client);
 
+int infinite_loop(cteams_t *client);
+
 #endif /* !TEAMS_SERVER_H_ */
