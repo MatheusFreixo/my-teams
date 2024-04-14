@@ -13,6 +13,10 @@
 
     #define INPUT_FD 0
     #define OUTPUT_FD 1
+    #define MAX_NAME_LENGTH 32
+    #define MAX_DESCRIPTION_LENGTH 255
+    #define MAX_BODY_LENGTH 512
+
 
 typedef struct message {
     char *xxx;
@@ -27,9 +31,11 @@ typedef struct check {
 typedef struct client_teams {
     int fd;
     int ip;
+    char *id;
     struct sockaddr_in addr;
     struct sockaddr_in client_addr;
     fd_set readfds;
+    char *name;
     int *client_fds;
     char *buffer;
     char *in_buffer;
@@ -56,5 +62,7 @@ struct sockaddr_in configure_socket(int ip, int port);
 void to_exit(cteams_t *client);
 
 int infinite_loop(cteams_t *client);
+
+void check_messages(cteams_t *client);
 
 #endif /* !TEAMS_SERVER_H_ */
