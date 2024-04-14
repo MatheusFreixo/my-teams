@@ -9,8 +9,9 @@
 
 void check_messages(cteams_t *client)
 {
-    client->tok = strtok(client->buffer, "\r\n");
     char **msg = split_str(client->buffer, ' ');
+
+    client->tok = strtok(client->buffer, "\r\n");
     if (strncmp(msg[0], "LOGIN", 5) == 0) {
         client->id = strdup(msg[1]);
         client_event_logged_in(client->id, client->name);
@@ -20,6 +21,6 @@ void check_messages(cteams_t *client)
         to_exit(client);
         exit(0);
     }
-    free (client->buffer);
+    free(client->buffer);
     client->buffer = malloc(sizeof(char) * 1024 + 1);
 }

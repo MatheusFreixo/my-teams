@@ -9,8 +9,9 @@
 
 int check_command(steams_t *server, char *command, int client_fd)
 {
-    server->tok = strtok(server->buffer, "\r\n");
+    char *tok = strtok(server->buffer, "\r\n");
     char **cmd = split_str(command, ' ');
+
     if (strcmp(cmd[0], "/login") == 0 && cmd[1] != NULL) {
         user_log_in(server, cmd[1], client_fd);
         return (1);
