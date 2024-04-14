@@ -22,6 +22,7 @@ struct client_teams *setup_client_struct(char *ip, char *port)
     tmp->buffer = malloc(sizeof(char) * 1024 + 1);
     tmp->welcome = "Client connected\n";
     tmp->in_buffer = malloc(sizeof(char) * 1024 + 1);
+    tmp->name = malloc(sizeof(char) * MAX_NAME_LENGTH + 1);
     return (tmp);
 }
 
