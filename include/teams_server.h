@@ -11,6 +11,24 @@
     #include "my_teams.h"
     #include "../libs/myteams/logging_server.h"
 
+typedef struct list {
+    const char *id;
+    char *name;
+    LIST_ENTRY(list) entry;
+} list_t;
+
+typedef struct users {
+    const char *id;
+    char *name;
+    bool status;
+    int fd;
+    list_t *teams;
+    list_t *channels;
+    list_t *threads;
+    list_t *replies;
+    LIST_ENTRY(users) entry;
+} users_t;
+
 typedef struct message {
     char *xxx;
 } msg_t;
@@ -26,6 +44,14 @@ typedef struct server_teams {
     int client_fd;
     struct sockaddr_in addr;
     struct sockaddr_in client_addr;
+    LIST_HEAD(UserHead, users) users;
+    LIST_HEAD(ChannelHead, list) channels;
+    LIST_HEAD(ThreadHead, list) threads;
+    LIST_HEAD(ReplyHead, list) replies;
+    struct users *last_user;
+    struct list *last_channel;
+    struct list *last_thread;
+    struct list *last_reply;
     fd_set readfds;
     int *client_fds;
     char *buffer;
@@ -65,5 +91,17 @@ void to_exit(steams_t *server);
 void free_arr(steams_t *server);
 
 void infinite_loop(steams_t *server);
+
+const char *gen_uuid_parsed(void);
+
+const char *get_user_id(steams_t *server, char *name);
+
+void user_log_in(steams_t *server, char *name, int client_fd);
+
+void user_log_out(steams_t *server, int client_fd);
+
+int check_command(steams_t *server, char *command, int client_fd);
+
+bool check_client(steams_t *server, int client_fd);
 
 #endif /* !TEAMS_SERVER_H_ */
