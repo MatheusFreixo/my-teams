@@ -16,3 +16,15 @@ const char *gen_uuid_parsed(void)
     uuid_unparse(id, id_parsed);
     return (id_parsed);
 }
+
+const char *get_user_id(steams_t *server, char *name)
+{
+    users_t *tmp = NULL;
+
+    LIST_FOREACH(tmp, &server->users, entry){
+        if (strcmp(tmp->name, name) == 0){
+            return (tmp->id);
+        }
+    }
+    return (NULL);
+}
