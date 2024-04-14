@@ -13,9 +13,12 @@ SRC_SERVER	=	./src/server/main.c											\
 				./src/server/client_connection/connection.c					\
 				./src/server/error_handling/error_handling.c				\
 				./src/server/commands/command_handling.c					\
+				./src/server/commands/command_checkers.c					\
 				./src/server/commands/split_str.c							\
 				./src/server/queue/manage_user_log.c						\
 				./src/server/queue/manage_uuid.c							\
+				./src/server/queue/checkers.c								\
+				./src/server/queue/getters.c								\
 
 SRC_CLIENT	=	./src/client/main.c											\
 				./src/client/client.c										\
