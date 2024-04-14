@@ -6,57 +6,76 @@
 */
 
 
+#include <stdbool.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "../../../include/lib.h"
 
-void auxiliar(split_t split, char const *str, char c)
+int count_word(char const *str, char c)
 {
-    split.letters = 0;
-    split.words = 0;
+    int count = 1;
+
     for (int index = 0; str[index] != '\0'; index++){
         if (str[index] == c){
-            split.arr[split.words][split.letters] = '\0';
-            split.letters = 0;
-            split.words++;
-        } else {
-            split.arr[split.words][split.letters] = str[index];
-            split.letters++;
+            count++;
         }
     }
-    split.arr[split.words][split.letters] = '\0';
+    return (count);
 }
 
-struct split init_struct(void)
+char **fill_arr(char **arr, char const *str, char c)
 {
-    split_t tmp;
+    bool is_quote = false;
+    char **tmp = arr;
+    int letters = 0;
+    int words = 0;
 
-    tmp.count_word = 1;
-    tmp.letters = 0;
-    tmp.words = 0;
+    for (int index = 0; str[index] != '\0'; index++)
+        if (str[index] == c && is_quote == false){
+            tmp[words][letters] = '\0';
+            letters = 0;
+            words++;
+        }else if (str[index] == '"') {
+            tmp[words][letters] = str[index];
+            is_quote = !is_quote;
+            letters++;
+        } else {
+            tmp[words][letters] = str[index];
+            letters++;
+        }
+    tmp[words][letters] = '\0';
     return (tmp);
+}
+
+char **alloc_arr(char const *str, char c, int count)
+{
+    char **arr = malloc(sizeof(char *) * (count + 1));
+    bool is_quote = false;
+    int words = 0;
+    int letters = 0;
+
+    arr = malloc(sizeof(char *) * (count + 1));
+    arr[count] = NULL;
+    for (int index = 0; str[index] != '\0'; index++)
+        if (str[index] == c && is_quote == false) {
+            arr[words] = malloc(sizeof(char) * letters + 1);
+            words++;
+            letters = 0;
+        } else if (str[index] == '"') {
+            is_quote = !is_quote;
+            letters++;
+        } else {
+            letters++;
+        }
+    arr[words] = malloc(sizeof(char) * letters + 1);
+    return (arr);
 }
 
 char **split_str(char const *str, char c)
 {
-    split_t split = init_struct();
+    char **arr = NULL;
 
-    for (int index = 0; str[index] != '\0'; index++) {
-        if (str[index] == c)
-            split.count_word++;
-    }
-    split.arr = malloc(sizeof(char *) * (split.count_word + 1));
-    split.arr[split.count_word] = NULL;
-    for (int index = 0; str[index] != '\0'; index++) {
-        if (str[index] == c) {
-            split.arr[split.words] = malloc(sizeof(char) * split.letters + 1);
-            split.words++;
-            split.letters = 0;
-        } else
-            split.letters++;
-    }
-    split.arr[split.words] = malloc(sizeof(char) * split.letters + 1);
-    auxiliar(split, str, c);
-    return (split.arr);
+    arr = alloc_arr(str, c, count_word(str, c));
+    arr = fill_arr(arr, str, c);
+    return (arr);
 }
