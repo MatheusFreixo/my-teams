@@ -12,11 +12,17 @@ SRC_SERVER	=	./src/server/main.c											\
 				./src/server/client_connection/client_management.c			\
 				./src/server/client_connection/connection.c					\
 				./src/server/error_handling/error_handling.c				\
+				./src/server/commands/command_handling.c					\
+				./src/server/commands/split_str.c							\
+				./src/server/queue/manage_user_log.c						\
+				./src/server/queue/manage_uuid.c							\
 
 SRC_CLIENT	=	./src/client/main.c											\
 				./src/client/client.c										\
 				./src/client/socket.c										\
 				./src/client/exit.c											\
+				./src/client/messages.c										\
+				./src/server/commands/split_str.c							\
 				./src/file_management/read_file.c							\
 				./src/file_management/write_file.c							\
 
@@ -37,7 +43,7 @@ LIB			=	-L./libs/myteams/ -lmyteams
 all:	$(NAME)
 
 $(NAME):	$(OBJ_SERVER) $(OBJ_CLIENT)
-		gcc -I./libs/myteams $(FLAG) $(NAME_SERVER) $(OBJ_SERVER) $(LIB)
+		gcc -I./libs/myteams $(FLAG) $(NAME_SERVER) $(OBJ_SERVER) $(LIB) -luuid
 		gcc -I./libs/myteams $(FLAG) $(NAME_CLIENT) $(OBJ_CLIENT) $(LIB)
 
 clean:
