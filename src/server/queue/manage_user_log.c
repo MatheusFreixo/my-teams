@@ -75,9 +75,9 @@ void user_log_out(steams_t *server, int client_fd)
 
 void manage_log_command(steams_t *server, char *cmd, char *name, int client_fd)
 {
-    if (strcmp(cmd, "/login") == 0 && name != NULL && strcmp(name, "") != 0) {
+    if (strcmp(cmd, "/login") == 0 && name != NULL && strcmp(name, "") != 0){
         user_log_in(server, name, client_fd);
-    } else if (strcmp(cmd, "/logout") == 0 && check_client(server, client_fd)) {
+    } else if (strcmp(cmd, "/logout") == 0 && check_client(server, client_fd)){
         user_log_out(server, client_fd);
     }
 }
