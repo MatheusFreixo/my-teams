@@ -43,7 +43,6 @@ int infinite_loop(cteams_t *client)
             read_input(client);
         if (FD_ISSET(client->fd, &client->readfds)) {
             read(client->fd, client->buffer, 1024);
-            printf("%s\n", client->buffer);
             check_messages(client);
         }
     }
