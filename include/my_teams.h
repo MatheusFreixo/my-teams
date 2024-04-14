@@ -19,10 +19,14 @@
     #include <sys/stat.h>
     #include <fcntl.h>
     #include <sys/wait.h>
+    #include <sys/queue.h>
     #include <dirent.h>
+    #include <uuid/uuid.h>
 
 void writefile(char *filepath, char *buffer);
 
 char *readfile(char *filepath);
+
+char **split_str(char const *str, char c);
 
 #endif /* !MY_TEAMS_H_ */
