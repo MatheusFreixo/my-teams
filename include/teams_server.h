@@ -139,4 +139,8 @@ bool check_client(steams_t *server, int client_fd);
 
 char *get_user_name(steams_t *server, int client_fd);
 
+bool check_log(char *command);
+
+void manage_log_command(steams_t *server, char *cmd, char *name, int client_fd);
+
 #endif /* !TEAMS_SERVER_H_ */
