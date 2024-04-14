@@ -38,6 +38,7 @@ struct server_teams *setup_server_struct(char *port)
         tmp->client_fds[i] = '\0';
     tmp->file_buff = malloc(sizeof(char) * 1000 + 1);
     tmp->check = setup_check_struct();
+    LIST_INIT(&tmp->users);
     return (tmp);
 }
 
