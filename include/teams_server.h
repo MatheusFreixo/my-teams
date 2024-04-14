@@ -17,6 +17,34 @@ typedef struct list {
     LIST_ENTRY(list) entry;
 } list_t;
 
+typedef struct replies {
+    const char *id;
+    char *name;
+    char *message;
+    LIST_ENTRY(list) entry;
+} replies_t;
+
+typedef struct threads {
+    const char *id;
+    char *name;
+    replies_t *replies;
+    LIST_ENTRY(threads) entry;
+} threads_t;
+
+typedef struct channels {
+    const char *id;
+    char *name;
+    threads_t *threads;
+    LIST_ENTRY(channels) entry;
+} channels_t;
+
+typedef struct teams {
+    const char *id;
+    char *name;
+    channels_t *channels;
+    LIST_ENTRY(teams) entry;
+} temas_t;
+
 typedef struct users {
     const char *id;
     char *name;
@@ -70,6 +98,11 @@ typedef struct server_teams {
     int status;
 } steams_t;
 
+static const char *log[] = {
+    "/login",
+    "/logout",
+};
+
 int create_socket(void);
 
 struct sockaddr_in configure_socket(int port);
@@ -103,5 +136,7 @@ void user_log_out(steams_t *server, int client_fd);
 int check_command(steams_t *server, char *command, int client_fd);
 
 bool check_client(steams_t *server, int client_fd);
+
+char *get_user_name(steams_t *server, int client_fd);
 
 #endif /* !TEAMS_SERVER_H_ */
