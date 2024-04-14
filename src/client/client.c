@@ -1,6 +1,6 @@
 /*
 ** EPITECH PROJECT, 2024
-** my_ftp
+** my_teams
 ** File description:
 ** client
 */
@@ -20,18 +20,17 @@ int server_connection(cteams_t *client)
 void read_input(cteams_t *client)
 {
     read(INPUT_FD, client->in_buffer, 1024);
-    if (strncmp(client->in_buffer, "/logout", 7) == 0){
-        close(client->fd);
-        to_exit(client);
-        client_event_logged_out("121", "No one");
-        exit(0);
-    }
+    write(client->fd, client->in_buffer, strlen(client->in_buffer));
+    free(client->in_buffer);
+    client->in_buffer = NULL;
+    client->in_buffer = malloc(sizeof(char) * 1024 + 1);
 }
 
 int infinite_loop(cteams_t *client)
 {
     if (server_connection(client) == 84)
         return (84);
+    write(client->fd, client->welcome, strlen(client->welcome));
     while (1) {
         FD_ZERO(&client->readfds);
         FD_SET(client->fd, &client->readfds);
@@ -40,12 +39,12 @@ int infinite_loop(cteams_t *client)
             printf("Error while selecting\n");
             return (84);
         }
-        send(client->fd, client->welcome, strlen(client->welcome), 0);
         if (FD_ISSET(INPUT_FD, &client->readfds))
             read_input(client);
         if (FD_ISSET(client->fd, &client->readfds)) {
             read(client->fd, client->buffer, 1024);
             printf("%s\n", client->buffer);
+            check_messages(client);
         }
     }
     return (0);
