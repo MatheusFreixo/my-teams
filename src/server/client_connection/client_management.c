@@ -24,9 +24,6 @@ int *storing_clients(steams_t *server)
         }
     write(server->client_fd, "Connected to the server",
             strlen("Connected to the server"));
-    printf("Client connected\n");
-    server->check.user[0] = false;
-    server->check.pass[0] = false;
     return (clients);
 }
 
