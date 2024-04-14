@@ -15,6 +15,7 @@ int *check_disconnection(steams_t *server, int i)
         printf("Client disconnected, socket fd is %d\n", clients[i]);
         clients[i] = 0;
     } else {
+        check_command(server, server->buffer, clients[i]);
     }
     return (clients);
 }
