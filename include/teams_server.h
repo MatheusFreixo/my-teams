@@ -129,6 +129,20 @@ static const char *log[] = {
     "/logout",
 };
 
+static const char *context_cmd[] = {
+    "/create",
+    "/list",
+    "/info",
+    "/use"
+};
+
+static const char *user_cmd[] = {
+    "/users",
+    "/user",
+    "/send",
+    "/messages"
+};
+
 int create_socket(void);
 
 struct sockaddr_in configure_socket(int port);
@@ -200,5 +214,9 @@ void add_thread_to_list(
     int client_fd);
 
 void add_reply_to_list(steams_t *server, char *message, int client_fd);
+
+bool check_context_cmd(steams_t *server, char *command, int client_fd);
+
+void context_based(steams_t *server, char **command, int client_fd);
 
 #endif /* !TEAMS_SERVER_H_ */
