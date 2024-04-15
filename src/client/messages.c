@@ -29,13 +29,24 @@ bool check_create(char *command)
 
 void manage_create_message(cteams_t *client, char **msg)
 {
-    if (strcmp(msg[0], "TEAM-CREATED") == 0)
+    if (strcmp(msg[0], "TEAM-CREATED") == 0){
         client_event_team_created(msg[1], msg[2], msg[3]);
-    if (strcmp(msg[0], "CHANNEL-CREATED") == 0)
+        client_print_team_created(msg[1], msg[2], msg[3]);
+    }
+    if (strcmp(msg[0], "CHANNEL-CREATED") == 0){
         client_event_channel_created(msg[1], msg[2], msg[3]);
-    if (strcmp(msg[0], "THREAD-CREATED") == 0)
+        client_print_channel_created(msg[1], msg[2], msg[3]);
+    }
+    if (strcmp(msg[0], "THREAD-CREATED") == 0){
         client_event_thread_created(msg[1], msg[2],
             (time_t)strtoul(msg[3], NULL, strlen(msg[3])), msg[4], msg[5]);
+        client_print_thread_created(msg[1], msg[2],
+            (time_t)strtoul(msg[3], NULL, strlen(msg[3])), msg[4], msg[5]);
+    }
+    if (strcmp(msg[0], "REPLY-CREATED") == 0){
+        client_print_reply_created(msg[1], msg[2],
+            (time_t)strtoul(msg[3], NULL, strlen(msg[3])), msg[4]);
+    }
 }
 
 void check_messages(cteams_t *client)
