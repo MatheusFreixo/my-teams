@@ -7,18 +7,18 @@
 
 #include "../../../include/teams_server.h"
 
-char *gen_message(char *type, char *name, char *desc, const char *id)
+char *gen_message_teams(char *type, teams_t *team)
 {
-    int size = strlen(type) + strlen(name) + strlen(desc) + strlen(id) + 3;
+    int size = strlen(type) + strlen(team->name) + strlen(team->description) + strlen(team->id) + 3;
     char *msg = malloc(sizeof(char) * size + 1);
 
     strcpy(msg, type);
     strcat(msg, "\n");
-    strcat(msg, id);
+    strcat(msg, team->id);
     strcat(msg, "\n");
-    strcat(msg, name);
+    strcat(msg, team->name);
     strcat(msg, "\n");
-    strcat(msg, desc);
+    strcat(msg, team->description);
     return (msg);
 }
 
@@ -38,7 +38,7 @@ void add_team_to_list(steams_t *server, char *name, char *desc, int client_fd)
         LIST_INSERT_HEAD(&server->teams, team, entry);
     else
         LIST_INSERT_AFTER(server->last_team, team, entry);
-    msg = gen_message("TEAM-CREATED", team->name, team->description, team->id);
+    msg = gen_message_teams("TEAM-CREATED", team);
     server_event_team_created(team->id, team->name,
         get_user_id_by_fd(server, client_fd));
     write(client_fd, msg, strlen(msg));
