@@ -29,3 +29,16 @@ bool check_context_cmd(steams_t *server, char *command, int client_fd)
     }
     return (false);
 }
+
+bool check_user_cmd(steams_t *server, char *command, int client_fd)
+{
+    if (check_client(server, client_fd) == false){
+        return (false);
+    }
+    for (int i = 0; user_cmd[i] != NULL; i++){
+        if (strcmp(user_cmd[i], command) == 0){
+            return (true);
+        }
+    }
+    return (false);
+}

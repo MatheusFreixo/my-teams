@@ -219,4 +219,6 @@ bool check_context_cmd(steams_t *server, char *command, int client_fd);
 
 void context_based(steams_t *server, char **command, int client_fd);
 
+bool check_user_cmd(steams_t *server, char *command, int client_fd);
+
 #endif /* !TEAMS_SERVER_H_ */
