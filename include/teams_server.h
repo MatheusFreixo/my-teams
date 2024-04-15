@@ -11,6 +11,13 @@
     #include "my_teams.h"
     #include "../libs/myteams/logging_server.h"
 
+typedef enum create_type{
+    TEAM,
+    CHANNEL,
+    THREAD,
+    REPLY
+} create_t;
+
 typedef struct list {
     const char *id;
     char *name;
@@ -26,7 +33,12 @@ typedef struct replies {
 
 typedef struct threads {
     const char *id;
-    char *name;
+    char *title;
+    char *message;
+    time_t timestamp;
+    const char *channel_id;
+    const char *team_id;
+    const char *user_id;
     replies_t *replies;
     LIST_ENTRY(threads) entry;
 } threads_t;
@@ -34,6 +46,8 @@ typedef struct threads {
 typedef struct channels {
     const char *id;
     char *name;
+    char *description;
+    const char *team_id;
     threads_t *threads;
     LIST_ENTRY(channels) entry;
 } channels_t;
@@ -41,9 +55,10 @@ typedef struct channels {
 typedef struct teams {
     const char *id;
     char *name;
+    char *description;
     channels_t *channels;
     LIST_ENTRY(teams) entry;
-} temas_t;
+} teams_t;
 
 typedef struct users {
     const char *id;
@@ -73,13 +88,20 @@ typedef struct server_teams {
     struct sockaddr_in addr;
     struct sockaddr_in client_addr;
     LIST_HEAD(UserHead, users) users;
-    LIST_HEAD(ChannelHead, list) channels;
-    LIST_HEAD(ThreadHead, list) threads;
-    LIST_HEAD(ReplyHead, list) replies;
+    LIST_HEAD(TeamsHead, teams) teams;
+    LIST_HEAD(ChannelHead, channels) channels;
+    LIST_HEAD(ThreadHead, threads) threads;
+    LIST_HEAD(ReplyHead, replies) replies;
     struct users *last_user;
-    struct list *last_channel;
-    struct list *last_thread;
-    struct list *last_reply;
+    struct teams *last_team;
+    struct channels *last_channel;
+    struct threads *last_thread;
+    struct replies *last_reply;
+    create_t create_type;
+    bool context;
+    char *team_id;
+    char *channel_id;
+    char *thread_id;
     fd_set readfds;
     int *client_fds;
     char *buffer;
@@ -127,7 +149,9 @@ void infinite_loop(steams_t *server);
 
 const char *gen_uuid_parsed(void);
 
-const char *get_user_id(steams_t *server, char *name);
+const char *get_user_id_by_name(steams_t *server, char *name);
+
+const char *get_user_id_by_fd(steams_t *server, int fd);
 
 void user_log_in(steams_t *server, char *name, int client_fd);
 
@@ -142,5 +166,21 @@ char *get_user_name(steams_t *server, int client_fd);
 bool check_log(char *command);
 
 void manage_log_command(steams_t *server, char *cmd, char *name, int client_fd);
+
+bool check_team(steams_t *server, char *name);
+
+bool check_thread(steams_t *server, char *thread_id);
+
+bool check_channel(steams_t *server, char *channel_id);
+
+void manage_create_command(steams_t *server, char **command, int client_fd);
+
+void add_team_to_list(steams_t *server, char *name, char *desc, int client_fd);
+
+void manage_context(steams_t *server, char **command, int client_fd);
+
+void add_channel_to_list(steams_t *server, char *name, char *desc, int client_fd);
+
+void add_thread_to_list(steams_t *server, char *title, char *message, int client_fd);
 
 #endif /* !TEAMS_SERVER_H_ */
