@@ -9,7 +9,21 @@
 
 void manage_create_command(steams_t *server, char **command, int client_fd)
 {
-    if (server->context == false && command[2] != NULL){
-        add_team_to_list(server, command[1], command[2], client_fd);
+    if (command[2] == NULL && server->create_type != REPLY){
+        return;
+    }
+    switch (server->create_type) {
+        case TEAM:
+            add_team_to_list(server, command[1], command[2], client_fd);
+            break;
+        case CHANNEL:
+            add_channel_to_list(server, command[1], command[2], client_fd);
+            break;
+        case THREAD:
+            add_thread_to_list(server, command[1], command[2], client_fd);
+            break;
+        case REPLY:
+            break;
+    
     }
 }
