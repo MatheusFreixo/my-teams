@@ -11,7 +11,7 @@
     #include "my_teams.h"
     #include "../libs/myteams/logging_server.h"
 
-typedef enum create_type{
+typedef enum create_type {
     TEAM,
     CHANNEL,
     THREAD,
@@ -169,7 +169,11 @@ char *get_user_name(steams_t *server, int client_fd);
 
 bool check_log(char *command);
 
-void manage_log_command(steams_t *server, char *cmd, char *name, int client_fd);
+void manage_log_command(
+    steams_t *server,
+    char *cmd,
+    char *name,
+    int client_fd);
 
 bool check_team(steams_t *server, char *name);
 
@@ -183,9 +187,17 @@ void add_team_to_list(steams_t *server, char *name, char *desc, int client_fd);
 
 void manage_context(steams_t *server, char **command, int client_fd);
 
-void add_channel_to_list(steams_t *server, char *name, char *desc, int client_fd);
+void add_channel_to_list(
+    steams_t *server,
+    char *name,
+    char *desc,
+    int client_fd);
 
-void add_thread_to_list(steams_t *server, char *title, char *message, int client_fd);
+void add_thread_to_list(
+    steams_t *server,
+    char *title,
+    char *message,
+    int client_fd);
 
 void add_reply_to_list(steams_t *server, char *message, int client_fd);
 

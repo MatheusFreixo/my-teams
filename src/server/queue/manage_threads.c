@@ -9,7 +9,8 @@
 
 char *gen_message_threads(char *type, threads_t *thread)
 {
-    int size = strlen(type) + strlen(thread->id) + strlen(thread->user_id) + strlen(thread->title) + strlen(thread->message) + 5;
+    int size = strlen(type) + strlen(thread->id) + strlen(thread->user_id)
+        + strlen(thread->title) + strlen(thread->message) + 5;
     char *msg;
     char *time;
 
@@ -30,7 +31,11 @@ char *gen_message_threads(char *type, threads_t *thread)
     return (msg);
 }
 
-struct threads *init_thread(steams_t *server, char *title, char *message, int client_fd)
+struct threads *init_thread(
+    steams_t *server,
+    char *title,
+    char *message,
+    int client_fd)
 {
     threads_t *tmp = malloc(sizeof(threads_t));
 
@@ -44,7 +49,11 @@ struct threads *init_thread(steams_t *server, char *title, char *message, int cl
     return (tmp);
 }
 
-void add_thread_to_list(steams_t *server, char *title, char *message, int client_fd)
+void add_thread_to_list(
+    steams_t *server,
+    char *title,
+    char *message,
+    int client_fd)
 {
     threads_t *thread = NULL;
     char *msg = NULL;

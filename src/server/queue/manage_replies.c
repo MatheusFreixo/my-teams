@@ -9,7 +9,8 @@
 
 char *gen_message_reply(char *type, replies_t *reply)
 {
-    int size = strlen(type) + strlen(reply->id) + strlen(reply->user_id) + strlen(reply->message) + 4;
+    int size = strlen(type) + strlen(reply->id)
+        + strlen(reply->user_id) + strlen(reply->message) + 4;
     char *msg;
     char *time;
 

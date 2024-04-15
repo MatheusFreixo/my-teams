@@ -49,11 +49,8 @@ void manage_create_message(cteams_t *client, char **msg)
     }
 }
 
-void check_messages(cteams_t *client)
+void manage_log_message(cteams_t *client, char **msg)
 {
-    char **msg = split_str(client->buffer, '\n');
-
-    client->tok = strtok(client->buffer, "\r\n");
     if (strncmp(msg[0], "LOGIN", 5) == 0){
         client->id = strdup(msg[1]);
         client_event_logged_in(client->id, client->name);
@@ -62,6 +59,16 @@ void check_messages(cteams_t *client)
         close(client->fd);
         to_exit(client);
         exit(0);
+    }
+}
+
+void check_messages(cteams_t *client)
+{
+    char **msg = split_str(client->buffer, '\n');
+
+    client->tok = strtok(client->buffer, "\r\n");
+    if (check_log(msg[0])){
+        manage_log_message(client, msg);
     } else if (check_create(msg[0])){
         manage_create_message(client, msg);
     }

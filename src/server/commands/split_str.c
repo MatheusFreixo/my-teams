@@ -35,7 +35,7 @@ char **fill_arr(char **arr, char const *str, char c)
             tmp[words][letters] = '\0';
             letters = 0;
             words++;
-        }else if (str[index] == '"') {
+        } else if (str[index] == '"') {
             tmp[words][letters] = str[index];
             is_quote = !is_quote;
             letters++;

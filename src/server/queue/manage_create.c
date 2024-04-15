@@ -25,6 +25,5 @@ void manage_create_command(steams_t *server, char **command, int client_fd)
         case REPLY:
             add_reply_to_list(server, command[1], client_fd);
             break;
-    
     }
 }

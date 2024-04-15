@@ -9,7 +9,8 @@
 
 char *gen_message_teams(char *type, teams_t *team)
 {
-    int size = strlen(type) + strlen(team->name) + strlen(team->description) + strlen(team->id) + 3;
+    int size = strlen(type) + strlen(team->name)
+        + strlen(team->description) + strlen(team->id) + 3;
     char *msg = malloc(sizeof(char) * size + 1);
 
     strcpy(msg, type);

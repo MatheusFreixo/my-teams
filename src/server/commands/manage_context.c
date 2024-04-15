@@ -9,13 +9,16 @@
 
 enum create_type check_context(steams_t *server)
 {
-    if (server->team_id != NULL && server->channel_id != NULL && server->thread_id != NULL){
+    if (server->team_id != NULL && server->channel_id != NULL
+    && server->thread_id != NULL){
         server->context = true;
         return (REPLY);
-    } else if (server->team_id != NULL && server->channel_id != NULL){
+    }
+    if (server->team_id != NULL && server->channel_id != NULL){
         server->context = true;
         return (THREAD);
-    } else if (server->team_id != NULL){
+    }
+    if (server->team_id != NULL){
         server->context = true;
         return (CHANNEL);
     }
@@ -29,9 +32,12 @@ void manage_context(steams_t *server, char **command, int client_fd)
     server->channel_id = NULL;
     server->thread_id = NULL;
     for (int i = 0; command[i] != NULL; i++) {
-        check_team(server, command[i]) ? server->team_id = command[i] : NULL;
-        check_channel(server, command[i]) ? server->channel_id = command[i] : NULL;
-        check_thread(server, command[i]) ? server->thread_id = command[i] : NULL;
+        server->team_id =
+            check_team(server, command[i]) ? command[i] : NULL;
+        server->channel_id =
+            check_channel(server, command[i]) ? command[i] : NULL;
+        server->thread_id =
+            check_thread(server, command[i]) ? command[i] : NULL;
     }
     server->create_type = check_context(server);
 }
