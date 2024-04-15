@@ -9,8 +9,21 @@
 
 bool check_log(char *command)
 {
-    for (int i = 0; log[i] != NULL; i++) {
-        if (strcmp(log[i], command) == 0) {
+    for (int i = 0; log[i] != NULL; i++){
+        if (strcmp(log[i], command) == 0){
+            return (true);
+        }
+    }
+    return (false);
+}
+
+bool check_context_cmd(steams_t *server, char *command, int client_fd)
+{
+    if (check_client(server, client_fd) == false){
+        return (false);
+    }
+    for (int i = 0; context_cmd[i] != NULL; i++){
+        if (strcmp(context_cmd[i], command) == 0){
             return (true);
         }
     }
