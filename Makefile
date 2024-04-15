@@ -15,8 +15,13 @@ SRC_SERVER	=	./src/server/main.c											\
 				./src/server/commands/command_handling.c					\
 				./src/server/commands/command_checkers.c					\
 				./src/server/commands/split_str.c							\
+				./src/server/commands/manage_context.c						\
 				./src/server/queue/manage_user_log.c						\
 				./src/server/queue/manage_uuid.c							\
+				./src/server/queue/manage_create.c							\
+				./src/server/queue/manage_teams.c							\
+				./src/server/queue/manage_channels.c						\
+				./src/server/queue/manage_threads.c						\
 				./src/server/queue/checkers.c								\
 				./src/server/queue/getters.c								\
 
