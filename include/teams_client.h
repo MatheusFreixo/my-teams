@@ -17,7 +17,6 @@
     #define MAX_DESCRIPTION_LENGTH 255
     #define MAX_BODY_LENGTH 512
 
-
 typedef struct message {
     char *xxx;
 } msg_t;
@@ -54,6 +53,18 @@ typedef struct client_teams {
     int status;
     char *welcome;
 } cteams_t;
+
+static const char *log[] = {
+    "LOGIN",
+    "LOGOUT",
+};
+
+static const char *create[] = {
+    "TEAM-CREATED",
+    "CHANNEL-CREATED",
+    "THREAD-CREATED",
+    "REPLY-CREATED",
+};
 
 int create_socket(void);
 
