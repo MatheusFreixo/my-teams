@@ -26,9 +26,13 @@ typedef struct list {
 
 typedef struct replies {
     const char *id;
-    char *name;
     char *message;
-    LIST_ENTRY(list) entry;
+    const char *channel_id;
+    const char *thread_id;
+    const char *team_id;
+    const char *user_id;
+    time_t timestamp;
+    LIST_ENTRY(replies) entry;
 } replies_t;
 
 typedef struct threads {
@@ -39,7 +43,7 @@ typedef struct threads {
     const char *channel_id;
     const char *team_id;
     const char *user_id;
-    replies_t *replies;
+    // LIST_HEAD(ReplyHead, reply) replies;
     LIST_ENTRY(threads) entry;
 } threads_t;
 
@@ -48,7 +52,7 @@ typedef struct channels {
     char *name;
     char *description;
     const char *team_id;
-    threads_t *threads;
+    // LIST_HEAD(ThreadHead, threads) threads;
     LIST_ENTRY(channels) entry;
 } channels_t;
 
@@ -56,7 +60,7 @@ typedef struct teams {
     const char *id;
     char *name;
     char *description;
-    channels_t *channels;
+    // LIST_HEAD(ChannelHead, channels) channels;
     LIST_ENTRY(teams) entry;
 } teams_t;
 
@@ -182,5 +186,7 @@ void manage_context(steams_t *server, char **command, int client_fd);
 void add_channel_to_list(steams_t *server, char *name, char *desc, int client_fd);
 
 void add_thread_to_list(steams_t *server, char *title, char *message, int client_fd);
+
+void add_reply_to_list(steams_t *server, char *message, int client_fd);
 
 #endif /* !TEAMS_SERVER_H_ */
