@@ -23,6 +23,7 @@ void manage_create_command(steams_t *server, char **command, int client_fd)
             add_thread_to_list(server, command[1], command[2], client_fd);
             break;
         case REPLY:
+            add_reply_to_list(server, command[1], client_fd);
             break;
     
     }
