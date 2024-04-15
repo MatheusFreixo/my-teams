@@ -21,7 +21,8 @@ SRC_SERVER	=	./src/server/main.c											\
 				./src/server/queue/manage_create.c							\
 				./src/server/queue/manage_teams.c							\
 				./src/server/queue/manage_channels.c						\
-				./src/server/queue/manage_threads.c						\
+				./src/server/queue/manage_threads.c							\
+				./src/server/queue/manage_replies.c							\
 				./src/server/queue/checkers.c								\
 				./src/server/queue/getters.c								\
 
