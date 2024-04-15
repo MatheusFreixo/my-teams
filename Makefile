@@ -1,64 +1,20 @@
 ##
 ## EPITECH PROJECT, 2024
-## my_ftp
+## my_teams
 ## File description:
 ## Makefile
 ##
 
-SRC_SERVER	=	./src/server/main.c											\
-				./src/server/create/socket.c								\
-				./src/server/create/exit.c									\
-				./src/server/create/server.c								\
-				./src/server/client_connection/client_management.c			\
-				./src/server/client_connection/connection.c					\
-				./src/server/error_handling/error_handling.c				\
-				./src/server/commands/command_handling.c					\
-				./src/server/commands/command_checkers.c					\
-				./src/server/commands/split_str.c							\
-				./src/server/commands/manage_context.c						\
-				./src/server/queue/manage_user_log.c						\
-				./src/server/queue/manage_uuid.c							\
-				./src/server/queue/manage_create.c							\
-				./src/server/queue/manage_teams.c							\
-				./src/server/queue/manage_channels.c						\
-				./src/server/queue/manage_threads.c							\
-				./src/server/queue/manage_replies.c							\
-				./src/server/queue/checkers.c								\
-				./src/server/queue/getters.c								\
-
-SRC_CLIENT	=	./src/client/main.c											\
-				./src/client/client.c										\
-				./src/client/socket.c										\
-				./src/client/exit.c											\
-				./src/client/messages.c										\
-				./src/server/commands/split_str.c							\
-				./src/file_management/read_file.c							\
-				./src/file_management/write_file.c							\
-
-OBJ_SERVER	=	$(SRC_SERVER:.c=.o)
-
-OBJ_CLIENT	=	$(SRC_CLIENT:.c=.o)
-
-INCLUDE		=	-I./include/
-
-FLAG		=	-Wall -Wextra -g -o
-
-NAME_SERVER	=	myteams_server
-
-NAME_CLIENT	=	myteams_cli
-
-LIB			=	-L./libs/myteams/ -lmyteams
-
-all:	$(NAME)
-
-$(NAME):	$(OBJ_SERVER) $(OBJ_CLIENT)
-		gcc -I./libs/myteams $(FLAG) $(NAME_SERVER) $(OBJ_SERVER) $(LIB) -luuid
-		gcc -I./libs/myteams $(FLAG) $(NAME_CLIENT) $(OBJ_CLIENT) $(LIB)
+all:
+	make -C src/server/
+	make -C src/client/
 
 clean:
-	rm -f $(OBJ_SERVER) $(OBJ_CLIENT)
+	make clean -C src/server/
+	make clean -C src/client/
 
-fclean: clean
-	rm -f $(NAME_SERVER) $(NAME_CLIENT)
+fclean:
+	make fclean -C src/server/
+	make fclean -C src/client/
 
 re: fclean all
