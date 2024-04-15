@@ -33,11 +33,10 @@ void add_channel_to_list(
 
     if (check_channel(server, name) || strcmp(name, "") == 0)
         return;
-    channel = malloc(sizeof(teams_t));
+    channel = malloc(sizeof(channels_t));
     channel->id = gen_uuid_parsed();
     channel->name = name;
     channel->description = desc;
-    channel->threads = NULL;
     channel->team_id = server->team_id;
     if (LIST_EMPTY(&server->channels))
         LIST_INSERT_HEAD(&server->channels, channel, entry);

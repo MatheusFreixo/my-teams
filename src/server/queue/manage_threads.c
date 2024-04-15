@@ -32,12 +32,11 @@ char *gen_message_threads(char *type, threads_t *thread)
 
 struct threads *init_thread(steams_t *server, char *title, char *message, int client_fd)
 {
-    threads_t *tmp = malloc(sizeof(teams_t));
+    threads_t *tmp = malloc(sizeof(threads_t));
 
     tmp->id = gen_uuid_parsed();
     tmp->title = title;
     tmp->message = message;
-    tmp->replies = NULL;
     tmp->channel_id = server->channel_id;
     tmp->team_id = server->team_id;
     tmp->user_id = get_user_id_by_fd(server, client_fd);
