@@ -35,6 +35,7 @@ void add_user_to_list(steams_t *server, char *name, int client_fd)
     user->status = true;
     user->fd = client_fd;
     user->id = gen_uuid_parsed();
+    user->msg = malloc(sizeof(char) * MAX_BODY_LENGTH + 1);
     if (LIST_EMPTY(&server->users)){
         LIST_INSERT_HEAD(&server->users, user, entry);
     } else {

@@ -21,6 +21,9 @@ void manage_user_message(char **msg)
             client_print_users(details[0], details[1], atoi(details[2]));
         }
     }
+    if (strcmp(msg[0], "RECEIVED") == 0){
+        client_event_private_message_received(msg[1], msg[2]);
+    }
 }
 
 void manage_create_message(cteams_t *client, char **msg)

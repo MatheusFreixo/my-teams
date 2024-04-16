@@ -67,6 +67,7 @@ typedef struct teams {
 typedef struct users {
     const char *id;
     char *name;
+    char *msg;
     bool status;
     int fd;
     list_t *teams;
@@ -236,5 +237,9 @@ char *get_all_users(steams_t *server);
 char *get_specific_user(steams_t *server, char *id);
 
 void user_related(steams_t *server, char **command, int client_fd);
+
+char *concat_message_to_send(char *str1, char *id, char *message);
+
+char *concat_message_info(char *str1, char *id, time_t timest, char *msg);
 
 #endif /* !TEAMS_SERVER_H_ */

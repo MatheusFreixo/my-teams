@@ -11,12 +11,11 @@ char *gen_message_threads(char *type, threads_t *thread)
 {
     int size = strlen(type) + strlen(thread->id) + strlen(thread->user_id)
         + strlen(thread->title) + strlen(thread->message) + 5;
-    char *msg;
+    char *msg = malloc(sizeof(char) * size + 1);
     char *time;
 
     sprintf(time, "%ld", thread->timestamp);
     size = size + strlen(time);
-    msg = malloc(sizeof(char) * size + 1);
     strcpy(msg, type);
     strcat(msg, "\n");
     strcat(msg, thread->id);
@@ -28,6 +27,7 @@ char *gen_message_threads(char *type, threads_t *thread)
     strcat(msg, thread->title);
     strcat(msg, "\n");
     strcat(msg, thread->message);
+    strcat(msg, "\n");
     return (msg);
 }
 

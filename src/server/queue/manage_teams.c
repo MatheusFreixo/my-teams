@@ -20,6 +20,7 @@ char *gen_message_teams(char *type, teams_t *team)
     strcat(msg, team->name);
     strcat(msg, "\n");
     strcat(msg, team->description);
+    strcat(msg, "\n");
     return (msg);
 }
 

@@ -26,6 +26,7 @@ char *gen_message_reply(char *type, replies_t *reply)
     strcat(msg, time);
     strcat(msg, "\n");
     strcat(msg, reply->message);
+    strcat(msg, "\n");
     return (msg);
 }
 

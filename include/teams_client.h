@@ -63,6 +63,7 @@ static const char *create[] = {
 static const char *user_msg[] = {
     "USERS",
     "USER",
+    "RECEIVED",
 };
 
 int create_socket(void);

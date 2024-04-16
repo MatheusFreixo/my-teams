@@ -21,6 +21,7 @@ char *gen_message_channels(char *type, channels_t *channel)
     strcat(msg, channel->name);
     strcat(msg, "\n");
     strcat(msg, channel->description);
+    strcat(msg, "\n");
     return (msg);
 }
 
