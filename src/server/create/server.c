@@ -33,7 +33,6 @@ struct server_teams *setup_server_struct(char *port)
     tmp->addr = configure_socket(tmp->port);
     tmp->buffer = malloc(sizeof(char) * 1024 + 1);
     tmp->client_fds = malloc(sizeof(int) * 1024);
-    tmp->pwd = malloc(sizeof(char) * 1000 + 1);
     for (int i = 0; i < 1024; i++)
         tmp->client_fds[i] = '\0';
     tmp->file_buff = malloc(sizeof(char) * 1000 + 1);
@@ -41,6 +40,7 @@ struct server_teams *setup_server_struct(char *port)
     tmp->context = false;
     tmp->create_type = TEAM;
     LIST_INIT(&tmp->users);
+    tmp->nb_users = 0;
     return (tmp);
 }
 
