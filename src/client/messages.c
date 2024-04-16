@@ -71,5 +71,6 @@ void check_messages(cteams_t *client)
     if (check_user_msg(msg[0]))
         manage_user_message(msg);
     free(client->buffer);
+    client->buffer = NULL;
     client->buffer = malloc(sizeof(char) * 1024 + 1);
 }

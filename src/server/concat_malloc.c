@@ -20,5 +20,6 @@ char *concat_malloc(char *str1, const char *id, char *name, bool status)
     strcat(str, name);
     strcat(str, "\t");
     strcat(str, status_str);
+    strcat(str, "\t");
     return (str);
 }
