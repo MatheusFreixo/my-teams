@@ -7,17 +7,21 @@
 
 #include "../../../include/teams_server.h"
 
+char *get_status(bool status)
+{
+    if (status == true)
+        return ("1");
+    return ("0");
+}
+
 char *get_specific_user(steams_t *server, char *id)
 {
     users_t *tmp = NULL;
     char *user = "USER\n";
-    char *status;
 
     LIST_FOREACH(tmp, &server->users, entry){
         if (strcmp(tmp->id, id) == 0){
-            status = malloc(sizeof(char) * 2);
-            status = (tmp->status == true) ? "1" : "0";
-            user = concat_malloc(user, tmp->id, tmp->name, status);
+            user = concat_malloc(user, tmp->id, tmp->name, tmp->status);
             return (user);
         }
     }

@@ -81,4 +81,10 @@ int infinite_loop(cteams_t *client);
 
 void check_messages(cteams_t *client);
 
+bool check_log(char *command);
+
+bool check_create(char *command);
+
+bool check_user_msg(char *command);
+
 #endif /* !TEAMS_SERVER_H_ */

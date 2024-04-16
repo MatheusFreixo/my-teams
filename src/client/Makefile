@@ -5,29 +5,30 @@
 ## Makefile
 ##
 
-SRC		=	./main.c							\
-			./client.c							\
-			./socket.c							\
-			./exit.c							\
-			./messages.c						\
-			./../server/commands/split_str.c	\
-			./../file_management/read_file.c	\
-			./../file_management/write_file.c	\
+SRC			=	./main.c							\
+				./client.c							\
+				./socket.c							\
+				./exit.c							\
+				./messages.c						\
+				./checkers.c						\
+				./../server/commands/split_str.c	\
+				./../file_management/read_file.c	\
+				./../file_management/write_file.c	\
 
-OBJ		=	$(SRC:.c=.o)
+OBJ			=	$(SRC:.c=.o)
 
-INCLUDE	=	-I./../../include/
+INCLUDE		=	-I./../../include/ -I./../../libs/myteams/
 
-FLAG	=	-Wall -Wextra -g -o
+FLAG		=	-Wall -Wextra -g $(INCLUDE)
 
-NAME	=	myteams_cli
+NAME		=	myteams_cli
 
-LIB		=	-L./../../libs/myteams/ -lmyteams -I./../../include -I./../../libs/myteams/
+SHARE_LIB	=	-L../../libs/myteams/ -lmyteams
 
 all:	$(NAME)
 
 $(NAME):	$(OBJ)
-		gcc $(FLAG) $(NAME) $(OBJ) $(LIB)
+		gcc $(FLAG) -o $(NAME) $(OBJ) $(SHARE_LIB) -luuid
 		mv $(NAME) ../../
 
 clean:
