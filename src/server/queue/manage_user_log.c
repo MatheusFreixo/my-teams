@@ -6,6 +6,7 @@
 */
 
 #include "../../../include/teams_server.h"
+#include <string.h>
 
 int change_user_status(
     steams_t *server,
@@ -53,11 +54,13 @@ void user_log_in(steams_t *server, char *name, int client_fd)
     } else {
         server_event_user_logged_in(get_user_id_by_name(server, name));
     }
-    msg = malloc(sizeof(char) * 43);
+    msg = malloc(sizeof(char) * MAX_NAME_LENGTH + 44);
     id = strdup(get_user_id_by_name(server, name));
     strcpy(msg, "LOGIN\n");
     strcat(msg, id);
-    write(client_fd, msg, 42);
+    strcat(msg, "\n");
+    strcat(msg, name);
+    write(client_fd, msg, strlen(msg));
     free(msg);
     free(id);
 }

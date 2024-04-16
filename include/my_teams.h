@@ -23,6 +23,12 @@
     #include <dirent.h>
     #include <uuid/uuid.h>
 
+    #define INPUT_FD 0
+    #define OUTPUT_FD 1
+    #define MAX_NAME_LENGTH 32
+    #define MAX_DESCRIPTION_LENGTH 255
+    #define MAX_BODY_LENGTH 512
+
 void writefile(char *filepath, char *buffer);
 
 char *readfile(char *filepath);

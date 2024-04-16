@@ -11,12 +11,6 @@
     #include "my_teams.h"
     #include "../libs/myteams/logging_client.h"
 
-    #define INPUT_FD 0
-    #define OUTPUT_FD 1
-    #define MAX_NAME_LENGTH 32
-    #define MAX_DESCRIPTION_LENGTH 255
-    #define MAX_BODY_LENGTH 512
-
 typedef struct message {
     char *xxx;
 } msg_t;
