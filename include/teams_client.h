@@ -66,6 +66,11 @@ static const char *create[] = {
     "REPLY-CREATED",
 };
 
+static const char *user_msg[] = {
+    "USERS",
+    "USER",
+};
+
 int create_socket(void);
 
 struct sockaddr_in configure_socket(int ip, int port);

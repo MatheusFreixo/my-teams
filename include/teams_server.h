@@ -106,6 +106,11 @@ typedef struct server_teams {
     char *team_id;
     char *channel_id;
     char *thread_id;
+    int nb_users;
+    int nb_teams;
+    int nb_channels;
+    int nb_threads;
+    int nb_replies;
     fd_set readfds;
     int *client_fds;
     char *buffer;
@@ -127,20 +132,23 @@ typedef struct server_teams {
 static const char *log[] = {
     "/login",
     "/logout",
+    NULL
 };
 
 static const char *context_cmd[] = {
     "/create",
     "/list",
     "/info",
-    "/use"
+    "/use",
+    NULL
 };
 
 static const char *user_cmd[] = {
     "/users",
     "/user",
     "/send",
-    "/messages"
+    "/messages",
+    NULL,
 };
 
 int create_socket(void);
@@ -220,5 +228,13 @@ bool check_context_cmd(steams_t *server, char *command, int client_fd);
 void context_based(steams_t *server, char **command, int client_fd);
 
 bool check_user_cmd(steams_t *server, char *command, int client_fd);
+
+char *concat_malloc(char *str1, const char *id, char *name, bool status);
+
+char *get_all_users(steams_t *server);
+
+char *get_specific_user(steams_t *server, char *id);
+
+void user_related(steams_t *server, char **command, int client_fd);
 
 #endif /* !TEAMS_SERVER_H_ */
