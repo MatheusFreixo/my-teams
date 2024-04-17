@@ -32,17 +32,17 @@ void add_user_to_list(steams_t *server, char *name, int client_fd)
     users_t *user = malloc(sizeof(users_t));
 
     user->name = strdup(name);
+    user->id = gen_uuid_parsed();
+    server_event_user_created(user->id, user->name);
+    server_event_user_logged_in(user->id);
     user->status = true;
     user->fd = client_fd;
-    user->id = gen_uuid_parsed();
     user->msg = malloc(sizeof(char) * MAX_BODY_LENGTH + 1);
     if (LIST_EMPTY(&server->users)){
         LIST_INSERT_HEAD(&server->users, user, entry);
     } else {
         LIST_INSERT_AFTER(server->last_user, user, entry);
     }
-    server_event_user_logged_in(user->id);
-    server_event_user_created(user->id, user->name);
     server->last_user = user;
 }
 
@@ -50,18 +50,19 @@ void user_log_in(steams_t *server, char *name, int client_fd)
 {
     char *msg;
     char *id;
+    char *user_name = parse_message(name);
 
-    if (change_user_status(server, name, client_fd, false) == 0){
-        add_user_to_list(server, name, client_fd);
+    if (change_user_status(server, user_name, client_fd, false) == 0){
+        add_user_to_list(server, user_name, client_fd);
     } else {
-        server_event_user_logged_in(get_user_id_by_name(server, name));
+        server_event_user_logged_in(get_user_id_by_name(server, user_name));
     }
     msg = malloc(sizeof(char) * MAX_NAME_LENGTH + 44);
-    id = strdup(get_user_id_by_name(server, name));
+    id = strdup(get_user_id_by_name(server, user_name));
     strcpy(msg, "LOGIN\n");
     strcat(msg, id);
     strcat(msg, "\n");
-    strcat(msg, name);
+    strcat(msg, user_name);
     write(client_fd, msg, strlen(msg));
     free(msg);
     free(id);

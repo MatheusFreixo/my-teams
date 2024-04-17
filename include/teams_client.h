@@ -82,4 +82,10 @@ bool check_create(char *command);
 
 bool check_user_msg(char *command);
 
+time_t parse_time(char *time);
+
+char *parse_message(char *message);
+
+void manage_create_message(cteams_t *client, char **msg);
+
 #endif /* !TEAMS_SERVER_H_ */

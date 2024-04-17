@@ -9,8 +9,10 @@ SRC			=	./main.c							\
 				./client.c							\
 				./socket.c							\
 				./exit.c							\
-				./messages.c						\
 				./checkers.c						\
+				./message/messages.c				\
+				./message/manage_create_message.c	\
+				./message/parser.c					\
 				./../server/commands/split_str.c	\
 				./../file_management/read_file.c	\
 				./../file_management/write_file.c	\

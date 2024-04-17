@@ -35,4 +35,6 @@ char *readfile(char *filepath);
 
 char **split_str(char const *str, char c);
 
+char *parse_message(char *message);
+
 #endif /* !MY_TEAMS_H_ */
