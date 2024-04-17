@@ -41,8 +41,8 @@ void add_user_to_list(steams_t *server, char *name, int client_fd)
     } else {
         LIST_INSERT_AFTER(server->last_user, user, entry);
     }
-    server_event_user_created(user->id, user->name);
     server_event_user_logged_in(user->id);
+    server_event_user_created(user->id, user->name);
     server->last_user = user;
 }
 
