@@ -2,17 +2,10 @@
 ** EPITECH PROJECT, 2024
 ** my_teams
 ** File description:
-** getters
+** user_getters
 */
 
-#include "../../../include/teams_server.h"
-
-char *get_status(bool status)
-{
-    if (status == true)
-        return ("1");
-    return ("0");
-}
+#include "../../../../include/teams_server.h"
 
 char *get_specific_user(steams_t *server, char *id)
 {

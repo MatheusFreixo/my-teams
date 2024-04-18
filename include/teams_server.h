@@ -24,6 +24,14 @@ typedef struct list {
     LIST_ENTRY(list) entry;
 } list_t;
 
+typedef struct message {
+    const char *sender_id;
+    const char *receiver_id;
+    char *body;
+    time_t timestamp;
+    LIST_ENTRY(message) entry;
+} msg_t;
+
 typedef struct replies {
     const char *id;
     char *message;
@@ -67,7 +75,8 @@ typedef struct teams {
 typedef struct users {
     const char *id;
     char *name;
-    char *msg;
+    struct message *last_msg;
+    LIST_HEAD(MsgHead, message) msg;
     bool status;
     int fd;
     list_t *teams;
@@ -76,10 +85,6 @@ typedef struct users {
     list_t *replies;
     LIST_ENTRY(users) entry;
 } users_t;
-
-typedef struct message {
-    char *xxx;
-} msg_t;
 
 typedef struct check {
     bool *user;
@@ -238,8 +243,17 @@ char *get_specific_user(steams_t *server, char *id);
 
 void user_related(steams_t *server, char **command, int client_fd);
 
-char *concat_message_to_send(char *str1, char *id, char *message);
+char *concat_message_to_send(char *str1, const char *id, char *message);
 
-char *concat_message_info(char *str1, char *id, time_t timest, char *msg);
+char *concat_message_info(
+    char *str1, const char *id, time_t timest, char *msg);
+
+int get_user_fd_by_id(steams_t *server, const char *id);
+
+void set_message(steams_t *server, msg_t *message);
+
+char *get_messages_by_id(steams_t *server, const char *id);
+
+msg_t *store_message(steams_t *server, int fd, char *receiver_id, char *body);
 
 #endif /* !TEAMS_SERVER_H_ */

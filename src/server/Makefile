@@ -26,8 +26,11 @@ SRC		=	./main.c									\
 			./queue/manage_channels.c					\
 			./queue/manage_threads.c					\
 			./queue/manage_replies.c					\
+			./queue/manage_messages.c					\
 			./queue/checkers.c							\
-			./queue/getters.c							\
+			./queue/getters/general_getters.c			\
+			./queue/getters/user_getters.c				\
+			./queue/setters.c							\
 			./../client/message/parser.c				\
 
 OBJ		=	$(SRC:.c=.o)

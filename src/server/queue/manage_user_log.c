@@ -6,7 +6,6 @@
 */
 
 #include "../../../include/teams_server.h"
-#include <string.h>
 
 int change_user_status(
     steams_t *server,
@@ -37,7 +36,8 @@ void add_user_to_list(steams_t *server, char *name, int client_fd)
     server_event_user_logged_in(user->id);
     user->status = true;
     user->fd = client_fd;
-    user->msg = malloc(sizeof(char) * MAX_BODY_LENGTH + 1);
+    LIST_INIT(&user->msg);
+    user->last_msg = malloc(sizeof(msg_t));
     if (LIST_EMPTY(&server->users)){
         LIST_INSERT_HEAD(&server->users, user, entry);
     } else {

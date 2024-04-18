@@ -7,19 +7,20 @@
 
 #include "../../include/teams_server.h"
 
-char *concat_message_to_send(char *str1, char *id, char *message)
+char *concat_message_to_send(char *str1, const char *id, char *message)
 {
-    char *str = malloc(strlen(str1) + strlen(message) + 20);
+    char *str = malloc(strlen(str1) + strlen(id) + strlen(message) + 20);
 
     strcpy(str, str1);
     strcat(str, "\n");
     strcat(str, id);
-    strcat(str, "\n");
+    strcat(str, "\t");
     strcat(str, message);
+    strcat(str, "\t");
     return (str);
 }
 
-char *concat_message_info(char *str1, char *id, time_t timest, char *msg)
+char *concat_message_info(char *str1, const char *id, time_t timest, char *msg)
 {
     char *str = malloc(strlen(str1) + strlen(id) + strlen(msg) + 30);
     char *time = malloc(sizeof(char) * 20 + 1);
