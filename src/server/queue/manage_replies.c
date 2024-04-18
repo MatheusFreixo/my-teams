@@ -35,7 +35,7 @@ struct replies *init_reply(steams_t *server, char *message, int client_fd)
     replies_t *tmp = malloc(sizeof(teams_t));
 
     tmp->id = gen_uuid_parsed();
-    tmp->message = message;
+    tmp->message = parse_message(message);
     tmp->channel_id = server->channel_id;
     tmp->thread_id = server->thread_id;
     tmp->team_id = server->team_id;

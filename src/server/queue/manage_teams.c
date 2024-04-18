@@ -33,8 +33,8 @@ void add_team_to_list(steams_t *server, char *name, char *desc, int client_fd)
         return;
     team = malloc(sizeof(teams_t));
     team->id = gen_uuid_parsed();
-    team->name = name;
-    team->description = desc;
+    team->name = parse_message(name);
+    team->description = parse_message(desc);
     if (LIST_EMPTY(&server->teams))
         LIST_INSERT_HEAD(&server->teams, team, entry);
     else

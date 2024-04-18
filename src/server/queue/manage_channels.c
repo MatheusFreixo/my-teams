@@ -36,8 +36,8 @@ void add_channel_to_list(
         return;
     channel = malloc(sizeof(channels_t));
     channel->id = gen_uuid_parsed();
-    channel->name = name;
-    channel->description = desc;
+    channel->name = parse_message(name);
+    channel->description = parse_message(desc);
     channel->team_id = server->team_id;
     if (LIST_EMPTY(&server->channels))
         LIST_INSERT_HEAD(&server->channels, channel, entry);
