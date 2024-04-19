@@ -12,9 +12,9 @@ int check_command(steams_t *server, char *command, int client_fd)
     char *tok = strtok(server->buffer, "\r\n");
     char **cmd = split_str(command, ' ');
 
-    if (check_log(parse_message(cmd[0])))
+    if (check_log(cmd[0]))
         manage_log_command(
-            server, parse_message(cmd[0]), parse_message(cmd[1]), client_fd);
+            server, cmd[0], cmd[1], client_fd);
     if (check_context_cmd(server, parse_message(cmd[0]), client_fd))
         context_based(server, cmd, client_fd);
     if (check_user_cmd(server, parse_message(cmd[0]), client_fd))
