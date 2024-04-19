@@ -85,7 +85,6 @@ void user_log_out(steams_t *server, int client_fd)
     strcat(msg, "\n");
     if (change_user_status(server, name, client_fd, true) == 1){
         server_event_user_logged_out(get_user_id_by_name(server, name));
-        send_message_to_all_users(server, msg);
         write(client_fd, msg, strlen(msg));
     }
 }
