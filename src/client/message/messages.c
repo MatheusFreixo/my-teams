@@ -17,7 +17,7 @@ void manage_messages(char **msg)
             break;
         }
         client_private_message_print_messages(
-            details[0], parse_time(details[1]), details[2]);
+            parse_message(details[0]), parse_time(details[1]), parse_message(details[2]));
     }
 }
 
