@@ -8,6 +8,16 @@
 
 #include "../../include/teams_client.h"
 
+bool check_subs_msg(char *command)
+{
+    for (int i = 0; subs_msg[i] != NULL; i++) {
+        if (strcmp(subs_msg[i], command) == 0) {
+            return (true);
+        }
+    }
+    return (false);
+}
+
 bool check_log(char *command)
 {
     for (int i = 0; log[i] != NULL; i++) {

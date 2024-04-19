@@ -51,6 +51,7 @@ typedef struct client_teams {
 static const char *log[] = {
     "LOGIN",
     "LOGOUT",
+    NULL,
 };
 
 static const char *create[] = {
@@ -58,6 +59,7 @@ static const char *create[] = {
     "CHANNEL-CREATED",
     "THREAD-CREATED",
     "REPLY-CREATED",
+    NULL,
 };
 
 static const char *user_msg[] = {
@@ -65,6 +67,15 @@ static const char *user_msg[] = {
     "USER",
     "RECEIVED",
     "MESSAGES",
+    NULL,
+};
+
+static const char *subs_msg[] = {
+    "SUBSCRIBED",
+    "UNSUBSCRIBED",
+    "SUBSCRIBED-TEAMS",
+    "SUBSCRIBED-USERS",
+    NULL,
 };
 
 int create_socket(void);
@@ -90,5 +101,9 @@ char *parse_message(char *message);
 void manage_create_message(cteams_t *client, char **msg);
 
 void manage_list_message(char **msg);
+
+bool check_subs_msg(char *command);
+
+void manage_subs_message(char **command);
 
 #endif /* !TEAMS_SERVER_H_ */

@@ -74,6 +74,7 @@ typedef struct teams {
     const char *id;
     char *name;
     char *desc;
+    char **subscribed;
     // LIST_HEAD(ChannelHead, channels) channels;
     LIST_ENTRY(teams) entry;
 } teams_t;
@@ -160,6 +161,13 @@ static const char *user_cmd[] = {
     "/user",
     "/send",
     "/messages",
+    NULL,
+};
+
+static const char *subscribe_cmd[] = {
+    "/subscribe",
+    "/unsubscribe",
+    "/subscribed",
     NULL,
 };
 
@@ -278,5 +286,18 @@ char *concat_reply(char *str1, replies_t *reply);
 char *get_threads_info(steams_t *server);
 
 char *get_replies_info(steams_t *server);
+
+bool check_subscribe_cmd(char *command);
+
+char *concat_subs_teams(char *str1, const char *id, char *name, char *desc);
+
+char *concat_subs(
+    char *str1, const char *team_id, const char *user_id, char *end);
+
+void manage_subscribe_command(steams_t *server, char **command, int client_fd);
+
+bool get_user_status(steams_t *server, char *id);
+
+char *get_user_name_by_id(steams_t *server, char *id);
 
 #endif /* !TEAMS_SERVER_H_ */

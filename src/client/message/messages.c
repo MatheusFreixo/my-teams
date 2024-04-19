@@ -88,6 +88,8 @@ void check_messages(cteams_t *client)
         manage_user_related_message(msg);
     if (strncmp(msg[0], "LIST", 4) == 0)
         manage_list_message(msg);
+    if (check_subs_msg(msg[0]))
+        manage_subs_message(msg);
     free(client->buffer);
     client->buffer = NULL;
     client->buffer = malloc(sizeof(char) * 1024 + 1);

@@ -5,36 +5,37 @@
 ## Makefile
 ##
 
-SRC		=	./main.c									\
-			./create/socket.c							\
-			./create/exit.c								\
-			./create/server.c							\
-			./client_connection/client_management.c		\
-			./client_connection/connection.c			\
-			./error_handling/error_handling.c			\
-			./commands/command_handling.c				\
-			./commands/command_checkers.c				\
-			./commands/manage_context.c					\
-			./commands/context_based/context_based.c	\
-			./commands/user_related/user_related.c		\
-			./queue/log_system/manage_user_log.c		\
-			./queue/manage_uuid.c						\
-			./queue/inserters/manage_create.c			\
-			./queue/inserters/manage_teams.c			\
-			./queue/inserters/manage_channels.c			\
-			./queue/inserters/manage_threads.c			\
-			./queue/inserters/manage_replies.c			\
-			./queue/manage_messages.c					\
-			./queue/manage_list.c						\
-			./queue/checkers.c							\
-			./queue/getters/general_getters.c			\
-			./queue/getters/user_getters.c				\
-			./queue/getters/list_getters.c				\
-			./queue/setters.c							\
-			./../common/parser.c						\
-			./../common/split_str.c						\
-			./../common/concat/concat_string.c			\
-			./../common/concat/concat_message.c			\
+SRC		=	./main.c										\
+			./create/socket.c								\
+			./create/exit.c									\
+			./create/server.c								\
+			./client_connection/client_management.c			\
+			./client_connection/connection.c				\
+			./error_handling/error_handling.c				\
+			./commands/command_handling.c					\
+			./commands/command_checkers.c					\
+			./commands/manage_context.c						\
+			./commands/context_based/context_based.c		\
+			./commands/user_related/user_related.c			\
+			./commands/manage_subscribe/manage_subscribe.c	\
+			./queue/log_system/manage_user_log.c			\
+			./queue/manage_uuid.c							\
+			./queue/inserters/manage_create.c				\
+			./queue/inserters/manage_teams.c				\
+			./queue/inserters/manage_channels.c				\
+			./queue/inserters/manage_threads.c				\
+			./queue/inserters/manage_replies.c				\
+			./queue/manage_messages.c						\
+			./queue/manage_list.c							\
+			./queue/checkers.c								\
+			./queue/getters/general_getters.c				\
+			./queue/getters/user_getters.c					\
+			./queue/getters/list_getters.c					\
+			./queue/setters.c								\
+			./../common/parser.c							\
+			./../common/split_str.c							\
+			./../common/concat/concat_string.c				\
+			./../common/concat/concat_message.c				\
 
 OBJ		=	$(SRC:.c=.o)
 

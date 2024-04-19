@@ -7,6 +7,16 @@
 
 #include "./../../../include/teams_server.h"
 
+bool check_subscribe_cmd(char *command)
+{
+    for (int i = 0; subscribe_cmd[i] != NULL; i++){
+        if (strcmp(subscribe_cmd[i], command) == 0){
+            return (true);
+        }
+    }
+    return (false);
+}
+
 bool check_log(char *command)
 {
     for (int i = 0; log[i] != NULL; i++){

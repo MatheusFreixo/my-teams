@@ -7,6 +7,30 @@
 
 #include "../../../../include/teams_server.h"
 
+char *get_user_name_by_id(steams_t *server, char *id)
+{
+    users_t *tmp = NULL;
+
+    LIST_FOREACH(tmp, &server->users, entry){
+        if (strcmp(tmp->id, id) == 0){
+            return (tmp->name);
+        }
+    }
+    return (NULL);
+}
+
+bool get_user_status(steams_t *server, char *id)
+{
+    users_t *tmp = NULL;
+
+    LIST_FOREACH(tmp, &server->users, entry){
+        if (strcmp(tmp->id, id) == 0){
+            return (tmp->status);
+        }
+    }
+    return (false);
+}
+
 char *get_specific_user(steams_t *server, char *id)
 {
     users_t *tmp = NULL;
