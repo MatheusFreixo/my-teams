@@ -32,12 +32,12 @@ void manage_context(steams_t *server, char **command, int client_fd)
     server->channel_id = NULL;
     server->thread_id = NULL;
     for (int i = 0; command[i] != NULL; i++) {
-        if (check_team(server, command[i]))
-            server->team_id = command[i];
-        if (check_channel(server, command[i]))
-            server->channel_id = command[i];
-        if (check_thread(server, command[i]))
-            server->thread_id = command[i];
+        if (check_team(server, parse_message(command[i])))
+            server->team_id = parse_message(command[i]);
+        if (check_channel(server, parse_message(command[i])))
+            server->channel_id = parse_message(command[i]);
+        if (check_thread(server, parse_message(command[i])))
+            server->thread_id = parse_message(command[i]);
     }
     server->create_type = check_context(server);
 }

@@ -7,30 +7,40 @@
 
 #include "../../../include/teams_client.h"
 
-void manage_subs_message(char **command)
+void manage_subs_unsubs_event(char **command)
 {
-    char **details = NULL;
+    char **det;
 
     if (strcmp(command[0], "SUBSCRIBED") == 0) {
-        details = split_str(command[1], '\t');
-        client_print_subscribed(
-            parse_message(details[0]), parse_message(details[1]));
+        det = split_str(parse_message(command[1]), '\t');
+        client_print_subscribed(parse_message(det[0]), parse_message(det[1]));
     }
     if (strcmp(command[0], "UNSUBSCRIBED") == 0) {
-        details = split_str(command[1], '\t');
+        det = split_str(parse_message(command[1]), '\t');
         client_print_unsubscribed(
-            parse_message(details[0]), parse_message(details[1]));
+            parse_message(det[0]), parse_message(det[1]));
+    }
+}
+
+void manage_subs_message(char **command)
+{
+    char **det = NULL;
+
+    if (strcmp(command[0], "SUBSCRIBED") == 0
+    || strcmp(command[0], "UNSUBSCRIBED") == 0){
+        manage_subs_unsubs_event(command);
+        return;
     }
     if (strcmp(command[0], "SUBSCRIBED-TEAMS") == 0)
         for (int i = 1; command[i] != NULL; i++) {
-            details = split_str(command[i], '\t');
-            client_print_teams(parse_message(command[0]),
-                parse_message(command[1]), parse_message(command[2]));
+            det = split_str(command[i], '\t');
+            client_print_teams(parse_message(det[0]),
+                parse_message(det[1]), parse_message(det[2]));
         }
     if (strcmp(command[0], "SUBSCRIBED-USERS") == 0)
         for (int i = 1; command[i] != NULL; i++) {
-            details = split_str(command[i], '\t');
-            client_print_users(parse_message(command[0]),
-                parse_message(command[1]), atoi(command[2]));
+            det = split_str(command[i], '\t');
+            client_print_users(parse_message(det[0]),
+                parse_message(det[1]), atoi(det[2]));
         }
 }

@@ -31,7 +31,7 @@ void list_subscribed(steams_t *server, char **command, int client_fd)
         return;
     }
     LIST_FOREACH(tmp, &server->teams, entry){
-        if (strcmp(tmp->id, command[1]) == 0){
+        if (strcmp(tmp->id, parse_message(command[1])) == 0){
             msg = get_all_subscribers(server, tmp);
         }
     }
@@ -70,19 +70,19 @@ void subscribe_to_team(steams_t *server, char *id, int client_fd)
 
 void manage_subscribe_command(steams_t *server, char **command, int client_fd)
 {
-    if (strcmp(command[0], "/subscribe") == 0) {
+    if (strcmp(parse_message(command[0]), "/subscribe") == 0) {
         if (command[1] == NULL) {
             return;
         }
-        subscribe_to_team(server, command[1], client_fd);
+        subscribe_to_team(server, parse_message(command[1]), client_fd);
     }
-    if (strcmp(command[0], "/subscribed") == 0) {
+    if (strcmp(parse_message(command[0]), "/subscribed") == 0) {
         list_subscribed(server, command, client_fd);
     }
-    if (strcmp(command[0], "/unsubscribe") == 0) {
+    if (strcmp(parse_message(command[0]), "/unsubscribe") == 0) {
         if (command[1] == NULL) {
             return;
         }
-        unsubscribe_from_team(server, command[1], client_fd);
+        unsubscribe_from_team(server, parse_message(command[1]), client_fd);
     }
 }

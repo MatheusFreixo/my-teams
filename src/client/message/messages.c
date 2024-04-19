@@ -16,8 +16,8 @@ void manage_messages(char **msg)
         if (details[2] == NULL){
             break;
         }
-        client_private_message_print_messages(
-            parse_message(details[0]), parse_time(details[1]), parse_message(details[2]));
+        client_private_message_print_messages(parse_message(details[0]),
+            parse_time(details[1]), parse_message(details[2]));
     }
 }
 
