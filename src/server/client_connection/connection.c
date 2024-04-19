@@ -10,12 +10,20 @@
 int *check_disconnection(steams_t *server, int i)
 {
     int *clients = server->client_fds;
+    char **split_buffer = NULL;
+    char *token = NULL;
 
     if (read(clients[i], server->buffer, 1024) == 0) {
         printf("Client disconnected, socket fd is %d\n", clients[i]);
         clients[i] = 0;
     } else {
-        check_command(server, server->buffer, clients[i]);
+        token = strtok(server->buffer, "\n");
+        while (token != NULL){
+            check_command(server, token, clients[i]);
+            token = strtok(NULL, "\n");
+        }
+        server->buffer = NULL;
+        server->buffer = malloc(sizeof(char) * 1024 + 1);
     }
     return (clients);
 }

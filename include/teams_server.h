@@ -310,4 +310,6 @@ char **remove_user_from_list(char **list, const char *user_id);
 
 char **add_user_id_to_list(char **list, const char *user_id);
 
+void send_message_to_all_users(steams_t *server, char *msg);
+
 #endif /* !TEAMS_SERVER_H_ */

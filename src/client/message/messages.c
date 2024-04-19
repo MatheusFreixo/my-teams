@@ -64,14 +64,19 @@ void manage_user_related_message(char **msg)
 void manage_log_message(cteams_t *client, char **msg)
 {
     if (strncmp(msg[0], "LOGIN", 5) == 0){
-        client->id = parse_message(msg[1]);
-        client->name = parse_message(msg[2]);
-        client_event_logged_in(client->id, client->name);
-    } else if (strncmp(msg[0], "LOGOUT", 6) == 0){
-        client_event_logged_out(client->id, client->name);
-        close(client->fd);
-        to_exit(client);
-        exit(0);
+        if (client->status == false){
+            client->id = parse_message(msg[1]);
+            client->name = parse_message(msg[2]);
+        }
+        client_event_logged_in(parse_message(msg[1]), parse_message(msg[2]));
+    }
+    if (strncmp(msg[0], "LOGOUT", 6) == 0){
+        client_event_logged_out(parse_message(msg[1]), parse_message(msg[2]));
+        if (client->id == parse_message(msg[1]) == 0){
+            close(client->fd);
+            to_exit(client);
+            exit(0);
+        }
     }
 }
 

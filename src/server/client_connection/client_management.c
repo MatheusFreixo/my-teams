@@ -22,8 +22,6 @@ int *storing_clients(steams_t *server)
             clients[i] = server->client_fd;
             break;
         }
-    write(server->client_fd, "Connected to the server",
-            strlen("Connected to the server"));
     return (clients);
 }
 

@@ -44,8 +44,7 @@ typedef struct client_teams {
     char *file_buff;
     char *pwd;
     check_t check;
-    int status;
-    char *welcome;
+    bool status;
 } cteams_t;
 
 static const char *log[] = {

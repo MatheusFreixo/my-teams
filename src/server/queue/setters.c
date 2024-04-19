@@ -7,6 +7,17 @@
 
 #include "./../../../include/teams_server.h"
 
+void send_message_to_all_users(steams_t *server, char *msg)
+{
+    users_t *user = NULL;
+
+    LIST_FOREACH(user, &server->users, entry) {
+        if (user->status){
+            write(user->fd, msg, strlen(msg));
+        }
+    }
+}
+
 msg_t *get_last_message(msg_t *message)
 {
     msg_t *tmp = message;

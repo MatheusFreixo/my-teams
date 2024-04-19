@@ -62,7 +62,8 @@ void user_log_in(steams_t *server, char *name, int client_fd)
     strcat(msg, id);
     strcat(msg, "\n");
     strcat(msg, user_name);
-    write(client_fd, msg, strlen(msg));
+    strcat(msg, "\n");
+    send_message_to_all_users(server, msg);
     free(msg);
     free(id);
 }
@@ -70,11 +71,22 @@ void user_log_in(steams_t *server, char *name, int client_fd)
 void user_log_out(steams_t *server, int client_fd)
 {
     char *name = get_user_name(server, client_fd);
-    char *msg = "LOGOUT";
+    char *fd = malloc(sizeof(char) * 5);
+    char *id = strdup(get_user_id_by_name(server, name));
+    char *msg = malloc(sizeof(char) * strlen(id) + strlen(name) + 13);
 
+    sprintf(fd, "%d", client_fd);
+    strcpy(msg, "LOGOUT\n");
+    strcat(msg, id);
+    strcat(msg, "\n");
+    strcat(msg, name);
+    strcat(msg, "\n");
+    strcat(msg, fd);
+    strcat(msg, "\n");
     if (change_user_status(server, name, client_fd, true) == 1){
         server_event_user_logged_out(get_user_id_by_name(server, name));
-        write(client_fd, "LOGOUT", 6);
+        send_message_to_all_users(server, msg);
+        write(client_fd, msg, strlen(msg));
     }
 }
 

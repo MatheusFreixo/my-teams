@@ -19,18 +19,18 @@ int server_connection(cteams_t *client)
 
 void read_input(cteams_t *client)
 {
-    read(INPUT_FD, client->in_buffer, 1024);
-    write(client->fd, client->in_buffer, strlen(client->in_buffer));
-    free(client->in_buffer);
-    client->in_buffer = NULL;
-    client->in_buffer = malloc(sizeof(char) * 1024 + 1);
+    if (fgets(client->in_buffer, MAX_INPUT, stdin)){
+        client->in_buffer[strlen(client->in_buffer) - 1] = '\0';
+        write(client->fd, client->in_buffer, strlen(client->in_buffer));
+        client->in_buffer = NULL;
+        client->in_buffer = malloc(sizeof(char) * 1024 + 1);
+    }
 }
 
 int infinite_loop(cteams_t *client)
 {
     if (server_connection(client) == 84)
         return (84);
-    write(client->fd, client->welcome, strlen(client->welcome));
     while (1) {
         FD_ZERO(&client->readfds);
         FD_SET(client->fd, &client->readfds);
