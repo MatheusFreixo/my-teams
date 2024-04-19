@@ -300,4 +300,14 @@ bool get_user_status(steams_t *server, char *id);
 
 char *get_user_name_by_id(steams_t *server, char *id);
 
+char *get_all_subscribers(steams_t *server, teams_t *team);
+
+int get_list_len(char **array);
+
+bool check_list(char **list, const char *user_id);
+
+char **remove_user_from_list(char **list, const char *user_id);
+
+char **add_user_id_to_list(char **list, const char *user_id);
+
 #endif /* !TEAMS_SERVER_H_ */

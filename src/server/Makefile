@@ -18,6 +18,9 @@ SRC		=	./main.c										\
 			./commands/context_based/context_based.c		\
 			./commands/user_related/user_related.c			\
 			./commands/manage_subscribe/manage_subscribe.c	\
+			./commands/manage_subscribe/manage_list_subs.c	\
+			./commands/manage_subscribe/subs_checker.c		\
+			./commands/manage_subscribe/subs_getter.c		\
 			./queue/log_system/manage_user_log.c			\
 			./queue/manage_uuid.c							\
 			./queue/inserters/manage_create.c				\
@@ -36,6 +39,7 @@ SRC		=	./main.c										\
 			./../common/split_str.c							\
 			./../common/concat/concat_string.c				\
 			./../common/concat/concat_message.c				\
+			./../common/concat/concat_subs_message.c				\
 
 OBJ		=	$(SRC:.c=.o)
 
