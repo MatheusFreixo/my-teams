@@ -21,20 +21,20 @@ void manage_send(steams_t *server, char **cmd, int client_fd)
     msg_t *msg;
     msg_t *tmp;
     int receiver_fd;
+    char *rec_id = parse_message(cmd[1]);
 
     if (cmd[2] == NULL)
         return;
-    msg = store_message(
-        server, client_fd, parse_message(cmd[1]), parse_message(cmd[2]));
+    msg = store_message(server, client_fd, rec_id, parse_message(cmd[2]));
     receiver_fd = get_user_fd_by_id(server, msg->receiver_id);
     if (receiver_fd == 0){
-        msg_to_send = concat_message_to_send(
-            "ERROR-SEND", parse_message(cmd[1]), msg->body);
+        msg_to_send = concat_message_to_send("ERROR-SEND", rec_id, msg->body);
         write(client_fd, msg_to_send, strlen(msg_to_send));
     } else {
         set_message(server, msg);
         msg_to_send = concat_message_to_send(
             "RECEIVED", msg->sender_id, msg->body);
+        server_event_private_message_sended(msg->sender_id, rec_id, msg->body);
         write(receiver_fd, msg_to_send, strlen(msg_to_send));
     }
 }
