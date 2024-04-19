@@ -6,7 +6,6 @@
 ##
 
 SRC		=	./main.c									\
-			./concat_malloc.c							\
 			./create/socket.c							\
 			./create/exit.c								\
 			./create/server.c							\
@@ -15,23 +14,27 @@ SRC		=	./main.c									\
 			./error_handling/error_handling.c			\
 			./commands/command_handling.c				\
 			./commands/command_checkers.c				\
-			./commands/split_str.c						\
 			./commands/manage_context.c					\
 			./commands/context_based/context_based.c	\
 			./commands/user_related/user_related.c		\
-			./queue/manage_user_log.c					\
+			./queue/log_system/manage_user_log.c		\
 			./queue/manage_uuid.c						\
-			./queue/manage_create.c						\
-			./queue/manage_teams.c						\
-			./queue/manage_channels.c					\
-			./queue/manage_threads.c					\
-			./queue/manage_replies.c					\
+			./queue/inserters/manage_create.c			\
+			./queue/inserters/manage_teams.c			\
+			./queue/inserters/manage_channels.c			\
+			./queue/inserters/manage_threads.c			\
+			./queue/inserters/manage_replies.c			\
 			./queue/manage_messages.c					\
+			./queue/manage_list.c						\
 			./queue/checkers.c							\
 			./queue/getters/general_getters.c			\
 			./queue/getters/user_getters.c				\
+			./queue/getters/list_getters.c				\
 			./queue/setters.c							\
-			./../client/message/parser.c				\
+			./../common/parser.c						\
+			./../common/split_str.c						\
+			./../common/concat/concat_string.c			\
+			./../common/concat/concat_message.c			\
 
 OBJ		=	$(SRC:.c=.o)
 

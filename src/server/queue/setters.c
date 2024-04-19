@@ -7,26 +7,35 @@
 
 #include "./../../../include/teams_server.h"
 
-void add_message_to_list(users_t *user, msg_t *message)
+msg_t *get_last_message(msg_t *message)
 {
-    user->last_msg = message;
-    if (LIST_EMPTY(&user->msg)){
-        LIST_INSERT_HEAD(&user->msg, message, entry);
+    msg_t *tmp = message;
+
+    while (tmp->entry.le_next != NULL){
+        tmp = tmp->entry.le_next;
+    }
+    return (tmp);
+}
+
+void add_message_to_list(steams_t *server, msg_t *message)
+{
+    msg_t *msg;
+
+    if (LIST_EMPTY(&server->msg)){
+        LIST_INSERT_HEAD(&server->msg, message, entry);
+        server->last_msg = message;
     } else {
-        LIST_INSERT_AFTER(user->last_msg, message, entry);
+        LIST_INSERT_AFTER(server->last_msg, message, entry);
+        server->last_msg = message;
     }
 }
 
 void set_message(steams_t *server, msg_t *message)
 {
-    users_t *tmp;
-
-    LIST_FOREACH(tmp, &server->users, entry){
-        if (strcmp(tmp->id, message->receiver_id) == 0){
-            add_message_to_list(tmp, message);
-        }
-        if (strcmp(tmp->id, message->sender_id) == 0){
-            add_message_to_list(tmp, message);
-        }
+    if (LIST_EMPTY(&server->msg)){
+        LIST_INSERT_HEAD(&server->msg, message, entry);
+    } else {
+        LIST_INSERT_AFTER(server->last_msg, message, entry);
     }
+    server->last_msg = message;
 }

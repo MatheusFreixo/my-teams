@@ -7,22 +7,33 @@
 
 #include "../../../../include/teams_server.h"
 
-char *get_messages_by_id(steams_t *server, const char *id)
+bool check_sender_receiver_id(
+    msg_t *tmp, const char *sender, const char *receiver)
 {
-    users_t *tmp = NULL;
-    msg_t *msg = NULL;
-    char *message = "MESSAGES";
+        if (strcmp(tmp->sender_id, sender) == 0
+        && strcmp(tmp->receiver_id, receiver) == 0){
+            return (true);
+        }
+    return (false);
+}
 
-    LIST_FOREACH(tmp, &server->users, entry){
-        if (strcmp(tmp->id, id) == 0){
-            LIST_FOREACH(msg, &tmp->msg, entry){
-                message = concat_message_info(
-                    message, msg->sender_id, msg->timestamp, msg->body);
-            }
-            return (message);
+char *get_messages_by_id(
+    steams_t *server, const char *id, const char *other_id)
+{
+    msg_t *tmp = NULL;
+    char *message = "MESSAGES\n";
+
+    LIST_FOREACH(tmp, &server->msg, entry){
+        if (check_sender_receiver_id(tmp, id, other_id)
+        || check_sender_receiver_id(tmp, other_id, id)){
+            message = concat_message_info(
+                message, tmp->sender_id,
+                tmp->timestamp, parse_message(tmp->body));
         }
     }
-    return (NULL);
+    if (strlen(message) == 9)
+        return (NULL);
+    return (message);
 }
 
 int get_user_fd_by_id(steams_t *server, const char *id)

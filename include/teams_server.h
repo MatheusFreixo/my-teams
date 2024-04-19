@@ -18,6 +18,12 @@ typedef enum create_type {
     REPLY
 } create_t;
 
+typedef struct thread_info {
+    char *title;
+    char *message;
+    time_t timestamp;
+} thread_info_t;
+
 typedef struct list {
     const char *id;
     char *name;
@@ -67,7 +73,7 @@ typedef struct channels {
 typedef struct teams {
     const char *id;
     char *name;
-    char *description;
+    char *desc;
     // LIST_HEAD(ChannelHead, channels) channels;
     LIST_ENTRY(teams) entry;
 } teams_t;
@@ -76,7 +82,6 @@ typedef struct users {
     const char *id;
     char *name;
     struct message *last_msg;
-    LIST_HEAD(MsgHead, message) msg;
     bool status;
     int fd;
     list_t *teams;
@@ -102,11 +107,13 @@ typedef struct server_teams {
     LIST_HEAD(ChannelHead, channels) channels;
     LIST_HEAD(ThreadHead, threads) threads;
     LIST_HEAD(ReplyHead, replies) replies;
+    LIST_HEAD(MessageHead, message) msg;
     struct users *last_user;
     struct teams *last_team;
     struct channels *last_channel;
     struct threads *last_thread;
     struct replies *last_reply;
+    struct message *last_msg;
     create_t create_type;
     bool context;
     char *team_id;
@@ -125,7 +132,6 @@ typedef struct server_teams {
     char **client_msg;
     char *connect_msg;
     char *tok;
-    const char **msg;
     int data_socket;
     int data_port;
     struct sockaddr_in data_addr;
@@ -252,8 +258,25 @@ int get_user_fd_by_id(steams_t *server, const char *id);
 
 void set_message(steams_t *server, msg_t *message);
 
-char *get_messages_by_id(steams_t *server, const char *id);
+char *get_messages_by_id(
+    steams_t *server, const char *id, const char *other_id);
 
 msg_t *store_message(steams_t *server, int fd, char *receiver_id, char *body);
+
+char *concat_team_channel(char *str1, const char *id, char *name, char *desc);
+
+char *get_teams_info(steams_t *server);
+
+void manage_list_command(steams_t *server, char **command, int client_fd);
+
+char *get_channels_info(steams_t *server);
+
+char *concat_thread(char *str1, threads_t *thread);
+
+char *concat_reply(char *str1, replies_t *reply);
+
+char *get_threads_info(steams_t *server);
+
+char *get_replies_info(steams_t *server);
 
 #endif /* !TEAMS_SERVER_H_ */

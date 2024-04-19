@@ -37,4 +37,6 @@ char **split_str(char const *str, char c);
 
 char *parse_message(char *message);
 
+char *parse_time_to_string(time_t time);
+
 #endif /* !MY_TEAMS_H_ */

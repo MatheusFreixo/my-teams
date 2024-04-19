@@ -89,4 +89,6 @@ char *parse_message(char *message);
 
 void manage_create_message(cteams_t *client, char **msg);
 
+void manage_list_message(char **msg);
+
 #endif /* !TEAMS_SERVER_H_ */

@@ -2,24 +2,23 @@
 ** EPITECH PROJECT, 2024
 ** my_teams
 ** File description:
-** manage_teams
+** manage_replies
 */
 
-#include "../../../include/teams_server.h"
+#include "../../../../include/teams_server.h"
 
 char *gen_message_reply(char *type, replies_t *reply)
 {
-    int size = strlen(type) + strlen(reply->id)
-        + strlen(reply->user_id) + strlen(reply->message) + 4;
+    int size = strlen(type) + strlen(reply->thread_id)
+        + strlen(reply->user_id) + strlen(reply->message) + 6;
     char *msg;
-    char *time;
+    char *time = parse_time_to_string(reply->timestamp);
 
-    sprintf(time, "%ld", reply->timestamp);
     size = size + strlen(time);
     msg = malloc(sizeof(char) * size + 1);
     strcpy(msg, type);
     strcat(msg, "\n");
-    strcat(msg, reply->id);
+    strcat(msg, reply->thread_id);
     strcat(msg, "\n");
     strcat(msg, reply->user_id);
     strcat(msg, "\n");
@@ -57,7 +56,8 @@ void add_reply_to_list(steams_t *server, char *message, int client_fd)
     else
         LIST_INSERT_AFTER(server->last_reply, reply, entry);
     msg = gen_message_reply("REPLY-CREATED", reply);
-    server_event_reply_created(reply->thread_id, reply->id, reply->message);
+    server_event_reply_created(
+        reply->thread_id, reply->user_id, reply->message);
     write(client_fd, msg, strlen(msg));
     server->last_reply = reply;
     free(msg);

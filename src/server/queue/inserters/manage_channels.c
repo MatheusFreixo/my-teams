@@ -2,11 +2,10 @@
 ** EPITECH PROJECT, 2024
 ** my_teams
 ** File description:
-** manage_teams
+** manage_channels
 */
 
-#include "../../../include/teams_server.h"
-#include <string.h>
+#include "../../../../include/teams_server.h"
 
 char *gen_message_channels(char *type, channels_t *channel)
 {

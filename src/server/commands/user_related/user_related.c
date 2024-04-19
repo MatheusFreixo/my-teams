@@ -12,7 +12,7 @@
 void manage_messages(steams_t *server, char **command, int client_fd)
 {
     char *messages = get_messages_by_id(
-        server, get_user_id_by_fd(server, client_fd));
+        server, get_user_id_by_fd(server, client_fd), command[1]);
 
     write(client_fd, messages, strlen(messages));
 }
@@ -21,6 +21,7 @@ void manage_send(steams_t *server, char **cmd, int client_fd)
 {
     char *msg_to_send = NULL;
     msg_t *msg;
+    msg_t *tmp;
     int receiver_fd;
 
     if (cmd[2] == NULL)
@@ -64,10 +65,10 @@ void user_related(steams_t *server, char **command, int client_fd)
 {
     if (strcmp(command[0], "/users") == 0)
         manage_users(server, command, client_fd);
-    if (strcmp(command[0], "/user") == 0)
+    if (strcmp(command[0], "/user") == 0 && command[1] != NULL)
         manage_user(server, command, client_fd);
-    if (strcmp(command[0], "/send") == 0)
+    if (strcmp(command[0], "/send") == 0 && command[2] != NULL)
         manage_send(server, command, client_fd);
-    if (strcmp(command[0], "/messages") == 0)
+    if (strcmp(command[0], "/messages") == 0 && command[1] != NULL)
         manage_messages(server, command, client_fd);
 }

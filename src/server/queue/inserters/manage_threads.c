@@ -5,17 +5,15 @@
 ** manage_teams
 */
 
-#include "../../../include/teams_server.h"
+#include "../../../../include/teams_server.h"
 
 char *gen_message_threads(char *type, threads_t *thread)
 {
-    int size = strlen(type) + strlen(thread->id) + strlen(thread->user_id)
-        + strlen(thread->title) + strlen(thread->message) + 5;
-    char *msg = malloc(sizeof(char) * size + 1);
-    char *time;
+    char *time = parse_time_to_string(thread->timestamp);
+    char *msg = malloc(sizeof(char) * strlen(type) + strlen(thread->id)
+        + strlen(thread->user_id) + strlen(time) + strlen(thread->title)
+        + strlen(thread->message) + 6);
 
-    sprintf(time, "%ld", thread->timestamp);
-    size = size + strlen(time);
     strcpy(msg, type);
     strcat(msg, "\n");
     strcat(msg, thread->id);

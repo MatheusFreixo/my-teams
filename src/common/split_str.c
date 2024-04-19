@@ -5,11 +5,7 @@
 ** split_str
 */
 
-
-#include <stdbool.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
+#include "../../include/my_teams.h"
 
 int count_word(char const *str, char c)
 {

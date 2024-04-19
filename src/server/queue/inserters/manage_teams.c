@@ -2,15 +2,15 @@
 ** EPITECH PROJECT, 2024
 ** my_teams
 ** File description:
-** manage_teams
+** manage_threads
 */
 
-#include "../../../include/teams_server.h"
+#include "../../../../include/teams_server.h"
 
 char *gen_message_teams(char *type, teams_t *team)
 {
     int size = strlen(type) + strlen(team->name)
-        + strlen(team->description) + strlen(team->id) + 3;
+        + strlen(team->desc) + strlen(team->id) + 3;
     char *msg = malloc(sizeof(char) * size + 1);
 
     strcpy(msg, type);
@@ -19,7 +19,7 @@ char *gen_message_teams(char *type, teams_t *team)
     strcat(msg, "\n");
     strcat(msg, team->name);
     strcat(msg, "\n");
-    strcat(msg, team->description);
+    strcat(msg, team->desc);
     strcat(msg, "\n");
     return (msg);
 }
@@ -34,7 +34,7 @@ void add_team_to_list(steams_t *server, char *name, char *desc, int client_fd)
     team = malloc(sizeof(teams_t));
     team->id = gen_uuid_parsed();
     team->name = parse_message(name);
-    team->description = parse_message(desc);
+    team->desc = parse_message(desc);
     if (LIST_EMPTY(&server->teams))
         LIST_INSERT_HEAD(&server->teams, team, entry);
     else

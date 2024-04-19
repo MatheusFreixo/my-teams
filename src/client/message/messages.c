@@ -12,7 +12,7 @@ void manage_messages(char **msg)
     char **details = NULL;
 
     for (int i = 1; msg[i] != NULL; i++){
-        details = split_str(msg[i], '\t');
+        details = split_str(msg[i], '\b');
         if (details[2] == NULL){
             break;
         }
@@ -86,6 +86,8 @@ void check_messages(cteams_t *client)
         manage_create_message(client, msg);
     if (check_user_msg(msg[0]))
         manage_user_related_message(msg);
+    if (strncmp(msg[0], "LIST", 4) == 0)
+        manage_list_message(msg);
     free(client->buffer);
     client->buffer = NULL;
     client->buffer = malloc(sizeof(char) * 1024 + 1);

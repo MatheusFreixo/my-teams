@@ -5,12 +5,20 @@
 ** parser
 */
 
-#include "../../../include/teams_client.h"
+#include "../../include/teams_client.h"
 
 time_t parse_time(char *time)
 {
     time_t parsed_time = (time_t)strtoul(time, NULL, strlen(time));
 
+    return (parsed_time);
+}
+
+char *parse_time_to_string(time_t time)
+{
+    char *parsed_time = malloc(sizeof(char) * 20);
+
+    sprintf(parsed_time, "%ld", time);
     return (parsed_time);
 }
 

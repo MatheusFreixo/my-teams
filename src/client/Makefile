@@ -12,8 +12,9 @@ SRC			=	./main.c							\
 				./checkers.c						\
 				./message/messages.c				\
 				./message/manage_create_message.c	\
-				./message/parser.c					\
-				./../server/commands/split_str.c	\
+				./message/manage_list.c				\
+				./../common/parser.c				\
+				./../common/split_str.c				\
 				./../file_management/read_file.c	\
 				./../file_management/write_file.c	\
 
