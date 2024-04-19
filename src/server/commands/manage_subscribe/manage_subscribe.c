@@ -18,7 +18,6 @@ void subs_teams(steams_t *server, int client_fd)
             msg = concat_subs_teams(msg, tmp->id, tmp->name, tmp->desc);
         }
     }
-    printf("msg = %s\n", msg);
     write(client_fd, msg, strlen(msg));
 }
 
