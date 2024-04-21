@@ -39,6 +39,7 @@ char *get_messages_by_id(
 int get_user_fd_by_id(steams_t *server, const char *id)
 {
     users_t *tmp = NULL;
+    int i = 0;
 
     LIST_FOREACH(tmp, &server->users, entry){
         if (strcmp(tmp->id, id) == 0){

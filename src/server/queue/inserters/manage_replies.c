@@ -58,7 +58,7 @@ void add_reply_to_list(steams_t *server, char *message, int client_fd)
     msg = gen_message_reply("REPLY-CREATED", reply);
     server_event_reply_created(
         reply->thread_id, reply->user_id, reply->message);
-    send_message_to_all_users(server, msg);
+    write(client_fd, msg, strlen(msg));
     server->last_reply = reply;
     free(msg);
 }

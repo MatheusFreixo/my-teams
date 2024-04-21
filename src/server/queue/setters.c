@@ -7,9 +7,22 @@
 
 #include "./../../../include/teams_server.h"
 
+void set_user_fd(steams_t *server, char *name, int client_fd)
+{
+    users_t *tmp = NULL;
+
+    LIST_FOREACH(tmp, &server->users, entry){
+        if (strcmp(tmp->name, name) == 0){
+            tmp->fd = client_fd;
+            break;
+        }
+    }
+}
+
 void send_message_to_all_users(steams_t *server, char *msg)
 {
     users_t *user = NULL;
+    int i = 0;
 
     LIST_FOREACH(user, &server->users, entry) {
         if (user->status){

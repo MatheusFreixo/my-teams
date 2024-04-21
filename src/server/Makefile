@@ -34,12 +34,16 @@ SRC		=	./main.c										\
 			./queue/getters/general_getters.c				\
 			./queue/getters/user_getters.c					\
 			./queue/getters/list_getters.c					\
+			./queue/store_lists/store_users.c				\
 			./queue/setters.c								\
+			./queue/upload_lists/upload_users.c								\
 			./../common/parser.c							\
 			./../common/split_str.c							\
 			./../common/concat/concat_string.c				\
 			./../common/concat/concat_message.c				\
-			./../common/concat/concat_subs_message.c				\
+			./../common/concat/concat_subs_message.c		\
+			./../file_management/write_file.c				\
+			./../file_management/read_file.c				\
 
 OBJ		=	$(SRC:.c=.o)
 

@@ -105,4 +105,6 @@ bool check_subs_msg(char *command);
 
 void manage_subs_message(char **command);
 
+void each_user_details(char **msg);
+
 #endif /* !TEAMS_SERVER_H_ */

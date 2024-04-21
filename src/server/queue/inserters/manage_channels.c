@@ -45,6 +45,7 @@ void add_channel_to_list(
     msg = gen_message_channels("CHANNEL-CREATED", channel);
     server_event_channel_created(channel->team_id, channel->id, name);
     write(client_fd, msg, strlen(msg));
+    store_channels(server);
     server->last_channel = channel;
     free(msg);
 }

@@ -19,9 +19,13 @@ typedef enum create_type {
 } create_t;
 
 typedef struct thread_info {
+    const char *id;
     char *title;
     char *message;
     time_t timestamp;
+    const char *channel_id;
+    const char *team_id;
+    const char *user_id;
 } thread_info_t;
 
 typedef struct list {
@@ -116,6 +120,7 @@ typedef struct server_teams {
     struct replies *last_reply;
     struct message *last_msg;
     create_t create_type;
+    int max_users;
     bool context;
     char *team_id;
     char *channel_id;
@@ -311,5 +316,25 @@ char **remove_user_from_list(char **list, const char *user_id);
 char **add_user_id_to_list(char **list, const char *user_id);
 
 void send_message_to_all_users(steams_t *server, char *msg);
+
+void store_users(steams_t *server);
+
+void upload_user(steams_t *server);
+
+void upload_second_user(steams_t *server);
+
+void upload_third_user(steams_t *server);
+
+void store_teams(steams_t *server);
+
+void store_channels(steams_t *server);
+
+void store_threads(steams_t *server);
+
+void store_replies(steams_t *server);
+
+void upload_team(steams_t *server);
+
+void set_user_fd(steams_t *server, char *name, int client_fd);
 
 #endif /* !TEAMS_SERVER_H_ */

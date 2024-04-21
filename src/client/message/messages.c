@@ -34,12 +34,7 @@ void manage_user_message(char **msg)
         client_print_user(id, name, atoi(details[2]));
     }
     if (strcmp(msg[0], "USERS") == 0){
-        for (int i = 1; msg[i] != NULL; i++){
-            details = split_str(msg[i], '\t');
-            id = parse_message(details[0]);
-            name = parse_message(details[1]);
-            client_print_users(id, name, atoi(details[2]));
-        }
+        each_user_details(msg);
     }
 }
 

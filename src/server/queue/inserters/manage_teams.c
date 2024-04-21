@@ -44,6 +44,6 @@ void add_team_to_list(steams_t *server, char *name, char *desc, int client_fd)
     server_event_team_created(team->id, team->name,
         get_user_id_by_fd(server, client_fd));
     write(client_fd, msg, strlen(msg));
+    store_teams(server);
     server->last_team = team;
-    free(msg);
 }

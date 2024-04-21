@@ -25,13 +25,20 @@ char *concat_reply(char *str1, replies_t *reply)
     return (str);
 }
 
+char *malloc_thread(char *str1, threads_t *thread, char *time)
+{
+    char *str = malloc(strlen(str1) + strlen(thread->id)
+        + strlen(thread->user_id) + strlen(time) + strlen(thread->title)
+        + strlen(thread->message) + 6);
+
+    return (str);
+}
+
 char *concat_thread(char *str1, threads_t *thread)
 {
-    char *str;
     char *time = parse_time_to_string(thread->timestamp);
+    char *str = malloc_thread(str1, thread, time);
 
-    str = malloc(strlen(str1) + strlen(thread->id) + strlen(thread->user_id)
-        + strlen(time) + strlen(thread->title) + strlen(thread->message) + 6);
     strcpy(str, str1);
     strcat(str, thread->id);
     strcat(str, "\t");
@@ -42,6 +49,10 @@ char *concat_thread(char *str1, threads_t *thread)
     strcat(str, thread->title);
     strcat(str, "\t");
     strcat(str, thread->message);
+    strcat(str, "\t");
+    strcat(str, thread->channel_id);
+    strcat(str, "\t");
+    strcat(str, thread->team_id);
     strcat(str, "\n");
     return (str);
 }

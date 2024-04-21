@@ -37,6 +37,7 @@ void add_user_to_list(steams_t *server, char *name, int client_fd)
     user->status = true;
     user->fd = client_fd;
     user->last_msg = malloc(sizeof(msg_t));
+    server->nb_users++;
     if (LIST_EMPTY(&server->users)){
         LIST_INSERT_HEAD(&server->users, user, entry);
     } else {
@@ -55,6 +56,7 @@ void user_log_in(steams_t *server, char *name, int client_fd)
         add_user_to_list(server, user_name, client_fd);
     } else {
         server_event_user_logged_in(get_user_id_by_name(server, user_name));
+        set_user_fd(server, user_name, client_fd);
     }
     msg = malloc(sizeof(char) * MAX_NAME_LENGTH + 44);
     id = strdup(get_user_id_by_name(server, user_name));
@@ -64,8 +66,8 @@ void user_log_in(steams_t *server, char *name, int client_fd)
     strcat(msg, user_name);
     strcat(msg, "\n");
     write(client_fd, msg, strlen(msg));
+    store_users(server);
     free(msg);
-    free(id);
 }
 
 void user_log_out(steams_t *server, int client_fd)
@@ -87,6 +89,7 @@ void user_log_out(steams_t *server, int client_fd)
         server_event_user_logged_out(get_user_id_by_name(server, name));
         write(client_fd, msg, strlen(msg));
     }
+    store_users(server);
 }
 
 void manage_log_command(steams_t *server, char *cmd, char *name, int client_fd)

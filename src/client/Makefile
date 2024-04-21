@@ -11,6 +11,7 @@ SRC			=	./main.c							\
 				./exit.c							\
 				./checkers.c						\
 				./message/messages.c				\
+				./message/message_each_user.c		\
 				./message/manage_create_message.c	\
 				./message/manage_list.c				\
 				./message/manage_subs.c				\

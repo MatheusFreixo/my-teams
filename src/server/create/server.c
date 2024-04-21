@@ -47,7 +47,11 @@ struct server_teams *setup_server_struct(char *port)
 int teams_server(char *port)
 {
     steams_t *server = setup_server_struct(port);
+    users_t *tmp;
+    int i = 0;
 
+    upload_user(server);
+    upload_team(server);
     if (error_handling(server) == 84){
         return (84);
     }

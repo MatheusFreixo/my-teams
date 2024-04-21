@@ -20,6 +20,7 @@ const char *gen_uuid_parsed(void)
 const char *get_user_id_by_name(steams_t *server, char *name)
 {
     users_t *tmp = NULL;
+    int i = 0;
 
     LIST_FOREACH(tmp, &server->users, entry){
         if (strcmp(tmp->name, name) == 0){
@@ -32,6 +33,7 @@ const char *get_user_id_by_name(steams_t *server, char *name)
 const char *get_user_id_by_fd(steams_t *server, int fd)
 {
     users_t *tmp = NULL;
+    int i = 0;
 
     LIST_FOREACH(tmp, &server->users, entry){
         if (tmp->fd == fd){
