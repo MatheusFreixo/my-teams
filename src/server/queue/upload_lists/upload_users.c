@@ -41,9 +41,13 @@ void upload_to_list_team(steams_t *server, char *id, char *name, char *desc)
 void upload_user(steams_t *server)
 {
     char *users = readfile("./users.txt");
-    char **each_user = split_str(users, '\n');
+    char **each_user = NULL;
     char **user_info = NULL;
 
+    if (users == NULL){
+        return;
+    }
+    each_user = split_str(users, '\n');
     for (int i = 1; each_user[i]; i++) {
         user_info = split_str(each_user[i], '\t');
         if (user_info[2] == NULL){
@@ -58,9 +62,13 @@ void upload_user(steams_t *server)
 void upload_team(steams_t *server)
 {
     char *teams = readfile("./teams.txt");
-    char **each_team = split_str(teams, '\n');
+    char **each_team = NULL;
     char **team_info = NULL;
 
+    if (teams == NULL){
+        return;
+    }
+    each_team = split_str(teams, '\n');
     for (int i = 1; each_team[i]; i++) {
         team_info = split_str(each_team[i], '\t');
         if (team_info[2] == NULL){
