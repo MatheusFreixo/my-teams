@@ -63,7 +63,7 @@ void user_log_in(steams_t *server, char *name, int client_fd)
     strcat(msg, "\n");
     strcat(msg, user_name);
     strcat(msg, "\n");
-    send_message_to_all_users(server, msg);
+    write(client_fd, msg, strlen(msg));
     free(msg);
     free(id);
 }
